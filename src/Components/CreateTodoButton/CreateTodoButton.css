@@ -1,0 +1,11 @@
+button.createTodoButton {
+    width: fit-content;
+    padding: 0.5rem;
+    background: #ff834a;
+    color: white;
+    font-weight: 500;
+    font-size: 1.25rem;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}

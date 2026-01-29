@@ -1,0 +1,86 @@
+div.missionCard {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    margin: 1rem auto;
+}
+
+div.missionCard-header {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+span.missionLabel {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+span.main {
+    background-color: #3498db; /* Azul */
+    color: #ffffff;
+}
+
+span.side {
+    background-color: #bdc3c7; /* Gris claro */
+    color: #2c3e50;
+}
+
+h3.missionCard-title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    padding-right: 40px; /* Espacio para el botón de elipsis */
+}
+
+p.missionCard-subtitle {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin: 0;
+    padding-right: 40px; /* Espacio para el botón de elipsis */
+}
+
+button.missionCard-options {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background: #8080801f;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #7f8c8d;
+    padding: 4px 0 0px 7px;
+    height: 35px;
+    width: 35px;
+
+}
+
+button.missionCard-options:hover {
+    color: #34495e; /* Color más oscuro al pasar el cursor */
+}
+
+/* Icono de elipsis vertical usando CSS */
+button.missionCard-options::before {
+    content: "\2807";
+    font-size: 1.2em;
+    display: block;
+    line-height: 0.8;
+}
+
+button.missionCard-options:active {
+    color: white; /* Color más oscuro al pasar el cursor */
+    background: #808080db;
+}
