@@ -7,21 +7,26 @@ div.missionCard {
     max-width: 250px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    /* gap: 5px; */
     position: relative;
     margin: 1rem auto;
+    /* height: 90px; */
+}
+
+div.missionCard.archived {
+    background-color: #e6e6e6;
+    color: #717171;
 }
 
 div.missionCard-header {
     display: flex;
-    justify-content: flex-start;
-    gap: 8px;
+    justify-content: space-between;
     margin-bottom: 8px;
 }
 
 span.missionLabel {
     padding: 4px 10px;
-    border-radius: 20px;
+    border-radius: 6px;
     font-size: 0.75em;
     font-weight: 600;
     text-transform: uppercase;
@@ -37,50 +42,27 @@ span.side {
     color: #2c3e50;
 }
 
+span.side::after {
+    content: "Archivado";
+    margin-left: 6px;
+}
+
+h3.missionCard-title.completed,
+p.missionCard-subtitle.completed {
+    text-decoration: line-through;
+    color: #95a5a6; /* Color gris para indicar que está completado */
+}
+
 h3.missionCard-title {
     font-size: 1.2em;
     font-weight: 600;
     color: #2c3e50;
     margin: 0;
-    padding-right: 40px; /* Espacio para el botón de elipsis */
 }
 
 p.missionCard-subtitle {
     font-size: 0.9em;
     color: #7f8c8d;
     margin: 0;
-    padding-right: 40px; /* Espacio para el botón de elipsis */
 }
 
-button.missionCard-options {
-    position: absolute;
-    top: 20px;
-    right: 10px;
-    background: #8080801f;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: #7f8c8d;
-    padding: 4px 0 0px 7px;
-    height: 35px;
-    width: 35px;
-
-}
-
-button.missionCard-options:hover {
-    color: #34495e; /* Color más oscuro al pasar el cursor */
-}
-
-/* Icono de elipsis vertical usando CSS */
-button.missionCard-options::before {
-    content: "\2807";
-    font-size: 1.2em;
-    display: block;
-    line-height: 0.8;
-}
-
-button.missionCard-options:active {
-    color: white; /* Color más oscuro al pasar el cursor */
-    background: #808080db;
-}

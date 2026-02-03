@@ -1,3 +1,4 @@
+import React from 'react';
 import { CreateTodoButton } from './Components/CreateTodoButton/CreateTodoButton';
 import { TodoCounter } from './Components/TodoCounter/TodoCounter';
 import { TodoList } from './Components/TodoList/TodoList';
@@ -29,7 +30,8 @@ const defaultTodos = [
     title: "Diseño de Proyecto",
     subtitle: "Planificación General",
     description: "Diseñar la arquitectura general del proyecto",
-    isCompleted: true,
+    isCompleted: false,
+    status: "in-progress",
     typeofMission: "main",
     objectives: [
       { objectiveId: 1, missionId: 1, description: "Definir alcance del proyecto", isCompleted: false },
@@ -42,6 +44,7 @@ const defaultTodos = [
     subtitle: "Modelado de Datos",
     description: "Diseñar la estructura de la base de datos",
     isCompleted: true,
+    status: "completed",
     typeofMission: "main",
     objectives: [
       { objectiveId: 3, missionId: 2, description: "Crear modelo entidad-relación", isCompleted: false },
@@ -50,11 +53,12 @@ const defaultTodos = [
   },
   {
     missionId: 3,
-    title: "Recopilación de Requerimientos",
+    title: "Toma de Requerimientos",
     subtitle: "Análisis de Requisitos",
     description: "Recopilar y documentar todos los requisitos del cliente",
-    isCompleted: true,
-    typeofMission: "side",
+    isCompleted: false,
+    typeofMission: "main",
+    status: "in-progress",
     objectives: [
       { objectiveId: 5, missionId: 3, description: "Entrevistar a stakeholders", isCompleted: true },
       { objectiveId: 6, missionId: 3, description: "Documentar requisitos funcionales", isCompleted: true },
@@ -66,7 +70,8 @@ const defaultTodos = [
     subtitle: "Interfaz de Usuario",
     description: "Desarrollar la interfaz de usuario de la aplicación",
     isCompleted: false,
-    typeofMission: "side",
+    status: "in-progress",
+    typeofMission: "main",
     objectives: [
       { objectiveId: 7, missionId: 4, description: "Crear componentes React", isCompleted: false },
       { objectiveId: 8, missionId: 4, description: "Implementar estilos CSS", isCompleted: false },
@@ -77,7 +82,8 @@ const defaultTodos = [
     title: "Implementación",
     subtitle: "Despliegue en Producción",
     description: "Desplegar la aplicación en el servidor de producción",
-    isCompleted: false,
+    isCompleted: true,
+    status: "completed",
     typeofMission: "main",
     objectives: [
       { objectiveId: 9, missionId: 5, description: "Configurar servidor", isCompleted: false },
@@ -90,17 +96,39 @@ const getCompletedTodos = (todos) => {
   return todos.filter(todo => !!todo.isCompleted).length;
 };
 
+const matchByTitle = (todos, searchValue) => {
+  return todos.filter(todo => 
+    todo.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
+}
+
 function App() {
+  // Componente padre debe manejar los estados de los componentes hijos
+  const [todos, setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState(''); 
+  
+  // Estados derivados, son variables calculadas a partir de otros estados
+  const totalTodos = todos.length;
+  const completedTodos = getCompletedTodos(todos);
+  const searchedTodos = matchByTitle(todos, searchValue);
+
   return (
     <div id="app-container" className='AppContainer'>
+      <TodoSearch 
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <div className='appContainerHeader'>
-        <TodoCounter completedTodos={getCompletedTodos(defaultTodos)} totalTodos={defaultTodos.length} />
-        <div className="appHeaderActions">
-          <TodoSearch />
-          <CreateTodoButton />
-        </div>
+        <TodoCounter 
+          completedTodos={completedTodos} 
+          totalTodos={totalTodos} 
+        />
       </div>
-      <TodoList todos={defaultTodos} />
+      <TodoList
+        setTodos={setTodos}
+        searchedTodos={searchedTodos}
+      />
+      <CreateTodoButton />
     </div>
   );
 }

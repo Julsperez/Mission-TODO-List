@@ -9,7 +9,7 @@ function CreateTodoButton() {
           console.log(event.target);
         }
       }>
-      + Nueva misión
+      +
     </button>
   );
 }

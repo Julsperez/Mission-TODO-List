@@ -10,6 +10,8 @@ div#app-container {
     );
     display: flex;
     flex-direction: column;
+    position: relative;
+    height: auto;
 }
 
 div.appContainerHeader {

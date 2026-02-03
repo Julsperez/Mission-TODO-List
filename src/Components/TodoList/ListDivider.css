@@ -1,0 +1,16 @@
+div.listDivider {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin: 1rem;
+}
+
+div.listDivider h3.dividerText {
+  margin-bottom: 0.5rem;
+}
+
+div.listDivider span.dividerLine {
+  width: 100%;
+  height: 2px;
+  background-color: #ccc;
+}
