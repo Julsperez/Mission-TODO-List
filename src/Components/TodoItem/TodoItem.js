@@ -1,6 +1,6 @@
 
 import React from "react";
-import { OverflowMenu } from "../OverflowMenu/OverflowMenu";
+import { OverflowMenu } from "../";
 import "./TodoItem.css";
 
 function TodoItem({ todo, onItemUpdated }) {

@@ -1,3 +1,4 @@
+import React from "react";
 import { 
   HiCheck, 
   HiPencilAlt, 
@@ -6,7 +7,6 @@ import {
   HiOutlineArchive,
   HiOutlineDotsHorizontal 
 } from "react-icons/hi";
-import React from "react";
 import "./OverflowMenu.css";
 
 function OverflowMenu({ todoItem, onSelectedOption }) {

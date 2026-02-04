@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { HiCheck } from "react-icons/hi";
-import { TodoItem } from "../TodoItem/TodoItem";
-import { ListDivider } from "./ListDivider";
+import { ListDivider, TodoItem } from "../";
 import "./TodoList.css";
 
 // const FILTER_STRATEGIES = {
