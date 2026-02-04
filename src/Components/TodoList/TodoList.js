@@ -1,5 +1,4 @@
-import React from "react";
-import { useMemo } from "react";
+import React, { useEffect } from "react";
 import { HiCheck } from "react-icons/hi";
 import { TodoItem } from "../TodoItem/TodoItem";
 import { ListDivider } from "./ListDivider";
@@ -28,9 +27,19 @@ function TodoList({ setTodos, searchedTodos }) {
   // const mainMissions = todos.filter(todo => todo.typeofMission === "main");
   // const sideMissions = todos.filter(todo => todo.typeofMission === "side");
   // const completedMissions = todos.filter(todo => todo.isCompleted);
+
   const [pillIndex, setPillIndex] = React.useState(0);
   const [filterTodos, setFilterTodos] = React.useState(searchedTodos);
-  const [dividerText, setDividerText] = React.useState("Misiones principales");
+  const [dividerText, setDividerText] = React.useState("Todas las misiones");
+
+  // console.log("Searched Todos:", searchedTodos);
+  
+  useEffect(() => {
+    console.log("Filtered Todos:", filterTodos);
+    handleSelectedPill(pillIndex);
+    // setFilterTodos(searchedTodos);
+    
+  }, [searchedTodos]);
 
   const handleSelectedPill = (pillIndex) => {
     if (pillIndex === 0) {
@@ -54,7 +63,6 @@ function TodoList({ setTodos, searchedTodos }) {
   //   setFilterTodos(searchedTodos.filter(activeStrategy.filterFn));
   // }, [searchedTodos, activeStrategy]);
 
-  
   const updateTodos = (updatedTodo) => {
     const newTodos = [...searchedTodos];
     const todoIndex = newTodos.findIndex(todo => todo.missionId === updatedTodo.missionId);

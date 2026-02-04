@@ -35,7 +35,9 @@ function TodoItem({ todo, onItemUpdated }) {
       <div className="missionCard-header">
         <span className={`
           missionLabel 
-          ${todoItem.status === "archived" ? "side" : "main"}`}>
+          ${todoItem.typeofMission === "side" ? "side" : "main"}
+          ${todoItem.status === "archived" && "archived"}
+        `}>
           {todoItem.typeofMission}
         </span>
         <OverflowMenu 

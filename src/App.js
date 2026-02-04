@@ -45,7 +45,7 @@ const defaultTodos = [
     description: "Diseñar la estructura de la base de datos",
     isCompleted: true,
     status: "completed",
-    typeofMission: "main",
+    typeofMission: "side",
     objectives: [
       { objectiveId: 3, missionId: 2, description: "Crear modelo entidad-relación", isCompleted: false },
       { objectiveId: 4, missionId: 2, description: "Normalizar tablas", isCompleted: false },
@@ -57,8 +57,8 @@ const defaultTodos = [
     subtitle: "Análisis de Requisitos",
     description: "Recopilar y documentar todos los requisitos del cliente",
     isCompleted: false,
-    typeofMission: "main",
     status: "in-progress",
+    typeofMission: "side",
     objectives: [
       { objectiveId: 5, missionId: 3, description: "Entrevistar a stakeholders", isCompleted: true },
       { objectiveId: 6, missionId: 3, description: "Documentar requisitos funcionales", isCompleted: true },

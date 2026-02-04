@@ -38,11 +38,16 @@ span.main {
 }
 
 span.side {
+    background-color: #2ecc71; /* Verde */
+    color: #ffffff;
+}
+
+span.archived {
     background-color: #bdc3c7; /* Gris claro */
     color: #2c3e50;
 }
 
-span.side::after {
+span.archived::after {
     content: "Archivado";
     margin-left: 6px;
 }

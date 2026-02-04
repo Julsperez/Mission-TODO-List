@@ -11,12 +11,12 @@ input.todoSearchInput {
     padding: 0 1rem;
     width: 100%;
     padding-left: 2.5rem;
-    border: 2px solid #ffffff;
+    border: 3px solid #ffffff;
     border-radius: 10px;
     outline: none;
-    background-color: #d8e4e8;
+    background-color: #e1ecef;
     color: #0d0c22;
-    box-shadow: 0 0 5px #C1D9BF, 0 0 0 10px #7f7f7feb;
+    box-shadow: 0 0 5px #c3d4c2, 0 0 0 6px #399effeb;
     transition: .3s ease;
 }
 
