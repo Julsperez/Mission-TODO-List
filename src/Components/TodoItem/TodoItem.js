@@ -4,14 +4,6 @@ import { OverflowMenu } from "../OverflowMenu/OverflowMenu";
 import "./TodoItem.css";
 
 function TodoItem({ todo, onItemUpdated }) {
-  // const showInfo = () => {
-  //   console.log("Misión:", todo);
-  // };
-
-  // const completeMission = (event) => {
-  //   event.stopPropagation();
-  //   console.log("Mostrar menú de opciones para la misión:", todo.missionId);
-  // }
   const [todoItem, setTodoItem] = React.useState(todo);
   const handleSelectedOption = (option) => {
     if (option === "complete" && !todoItem.isCompleted) {

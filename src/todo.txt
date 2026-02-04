@@ -1,0 +1,7 @@
+* Añadir funcionalidad a boton borrar de overflow menu
+* Al archivar una mision, la lista principal debe actualizarse y como si la tarea
+archivada hubiese sido borrada, el contador debe actualizarse de igual manera.
+
+
+
+

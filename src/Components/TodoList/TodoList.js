@@ -22,7 +22,7 @@ import "./TodoList.css";
 //   },
 // };
 
-function TodoList({ setTodos, searchedTodos }) {
+function TodoList({ onTodoUpdated, searchedTodos }) {
   // remove missions from main and side if they are completed
   // const mainMissions = todos.filter(todo => todo.typeofMission === "main");
   // const sideMissions = todos.filter(todo => todo.typeofMission === "side");
@@ -31,14 +31,9 @@ function TodoList({ setTodos, searchedTodos }) {
   const [pillIndex, setPillIndex] = React.useState(0);
   const [filterTodos, setFilterTodos] = React.useState(searchedTodos);
   const [dividerText, setDividerText] = React.useState("Todas las misiones");
-
-  // console.log("Searched Todos:", searchedTodos);
   
   useEffect(() => {
-    console.log("Filtered Todos:", filterTodos);
     handleSelectedPill(pillIndex);
-    // setFilterTodos(searchedTodos);
-    
   }, [searchedTodos]);
 
   const handleSelectedPill = (pillIndex) => {
@@ -67,7 +62,7 @@ function TodoList({ setTodos, searchedTodos }) {
     const newTodos = [...searchedTodos];
     const todoIndex = newTodos.findIndex(todo => todo.missionId === updatedTodo.missionId);
     newTodos[todoIndex] = updatedTodo;
-    setTodos(newTodos);
+    onTodoUpdated(newTodos);
   }
 
   return (
