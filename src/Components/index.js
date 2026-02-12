@@ -6,3 +6,4 @@ export { TodoItem } from './TodoItem/TodoItem';
 export { TodoList } from './TodoList/TodoList';
 export { TodoSearch } from './TodoSearch/TodoSearch';
 export { Modal } from './Modal/Modal';
+export { TodoForm } from './TodoForm/TodoForm';

@@ -1,11 +1,13 @@
 import React from "react";
+import { HiOutlineXCircle } from "react-icons/hi";
 import { TodoContext } from "../TodoContext";
 import { 
 	CreateTodoButton, 
 	TodoCounter, 
 	TodoList, 
 	TodoSearch, 
-	Modal
+	Modal,
+  TodoForm
 } from '../Components';
 import "./App.css"
 
@@ -53,7 +55,9 @@ function AppContext() {
 
 					{openTaskModal && (
 						<Modal>
-							<button onClick={handleCloseModal}> Close </button>
+							<button onClick={handleCloseModal} className="closeButtonModal">
+                <HiOutlineXCircle />
+              </button>
 							{isEditTask ? ( 
 								<>
 									<p>Form to edit task</p>
@@ -66,10 +70,7 @@ function AppContext() {
 									{task && <pre>{JSON.stringify(task, null, 2)}</pre>}
 								</>
 							) : (
-								<>
-									<p>Form to create new task</p>
-									
-								</>
+                <TodoForm></TodoForm>
 							)}
 						</Modal>
 					)}
