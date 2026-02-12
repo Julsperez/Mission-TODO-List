@@ -1,9 +1,15 @@
 
 import React from "react";
+import { TodoContext } from "../../TodoContext";
 import { OverflowMenu } from "../";
 import "./TodoItem.css";
 
 function TodoItem({ todo, onItemUpdated }) {
+  const { 
+    setOpenTaskModal, 
+    setIsShowTaskInfo, 
+    setTask 
+  } = React.useContext(TodoContext);
   const [todoItem, setTodoItem] = React.useState(todo);
   const handleSelectedOption = (option) => {
     if (option === "complete" && !todoItem.isCompleted) {
@@ -16,14 +22,25 @@ function TodoItem({ todo, onItemUpdated }) {
     if (option === "archive") {
       todoItem.status = "archived";
     }
+    if (option === "delete") {
+      todoItem.status = "deleted";      
+    }
 
     setTodoItem({...todoItem});
     onItemUpdated(todoItem);
   }
 
+  const handleSelectedItem = () => {
+    setOpenTaskModal(true);
+    setIsShowTaskInfo(true);
+    setTask(todoItem);
+  };
+
   return (
     // Agregar doble elipsis de drag and drop
-    <div className={`missionCard ${todoItem.status === "archived" && "archived"}`}>
+    <div 
+      onClick={handleSelectedItem}
+      className={`missionCard ${todoItem.status === "archived" && "archived"}`}>
       <div className="missionCard-header">
         <span className={`
           missionLabel 
@@ -34,7 +51,7 @@ function TodoItem({ todo, onItemUpdated }) {
         </span>
         <OverflowMenu 
           todoItem={todoItem}
-          onSelectedOption={handleSelectedOption} 
+          onSelectedOption={handleSelectedOption}
         />
       </div>
       <h3 

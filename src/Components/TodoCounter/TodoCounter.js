@@ -1,9 +1,19 @@
+import React from "react";
 import "./TodoCounter.css";
+import { TodoContext } from "../../TodoContext";
 
-function TodoCounter({completedTodos, totalTodos}) {
+// function TodoCounter({completedTodos, totalTodos}) {
+function TodoCounter() {
+  const { completedTodos, totalTodos } = React.useContext(TodoContext);
   return (
     <>
       {
+        totalTodos === 0 ? (
+          <>
+            <h1 className="todoTitle">¡Bienvenido a tu lista de misiones!</h1>
+            <p className="adviceText">Comienza agregando nuevas misiones para mantenerte organizado y enfocado.</p>
+          </>
+        ) :
         completedTodos === 0 ? (
           <>
             <h1 className="todoTitle">No has completado ninguna tarea</h1>

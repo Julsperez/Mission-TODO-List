@@ -11,7 +11,14 @@ div#app-container {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: auto;
+    min-height: 100vh;
+}
+
+h2.appLoadingMessage {
+    color: white;
+    font-size: xxx-large;
+    text-align: center;
+    margin: 50% auto;
 }
 
 div.appContainerHeader {

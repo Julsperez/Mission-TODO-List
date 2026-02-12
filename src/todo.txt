@@ -1,6 +1,16 @@
-* Añadir funcionalidad a boton borrar de overflow menu
+https://platzi.com/cursos/patrones-diseno-creacionales/
+https://platzi.com/cursos/arrays/
+https://platzi.com/buscar/?search=animaciones%20css&filters=course
+https://react-icons.github.io/react-icons/icons/hi/
+
+
+TODOS
+* enviar datos de todo al modal on edit and on show
+* Añadir estilos al modal
 * Al archivar una mision, la lista principal debe actualizarse y como si la tarea
 archivada hubiese sido borrada, el contador debe actualizarse de igual manera.
+* Añadir loading skeleton component al loading
+* Revisar estados de isEditTask cuando el modal este abierto
 
 
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { TodoContext } from "../../TodoContext";
 import { HiCheck } from "react-icons/hi";
 import { ListDivider, TodoItem } from "../";
 import "./TodoList.css";
@@ -21,7 +22,9 @@ import "./TodoList.css";
 //   },
 // };
 
-function TodoList({ onTodoUpdated, searchedTodos }) {
+// function TodoList({ onTodoUpdated, searchedTodos }) {
+function TodoList() {
+  const { setTodos, searchedTodos } = React.useContext(TodoContext);
   // remove missions from main and side if they are completed
   // const mainMissions = todos.filter(todo => todo.typeofMission === "main");
   // const sideMissions = todos.filter(todo => todo.typeofMission === "side");
@@ -60,8 +63,12 @@ function TodoList({ onTodoUpdated, searchedTodos }) {
   const updateTodos = (updatedTodo) => {
     const newTodos = [...searchedTodos];
     const todoIndex = newTodos.findIndex(todo => todo.missionId === updatedTodo.missionId);
-    newTodos[todoIndex] = updatedTodo;
-    onTodoUpdated(newTodos);
+    if (updatedTodo.status === "deleted") {
+      newTodos.splice(todoIndex, 1);
+    } else {
+      newTodos[todoIndex] = updatedTodo;
+    }
+    setTodos(newTodos);
   }
 
   return (
@@ -85,7 +92,7 @@ function TodoList({ onTodoUpdated, searchedTodos }) {
             <>
               {filterTodos.map(todo => (
                 <React.Fragment key={todo.missionId}>
-                  <TodoItem 
+                  <TodoItem
                     todo={todo}
                     onItemUpdated={updateTodos}
                   />

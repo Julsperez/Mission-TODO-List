@@ -10,6 +10,7 @@ body {
     background-image: url("./Assets/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 }
 
 code {

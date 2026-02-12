@@ -7,18 +7,34 @@ import {
   HiOutlineArchive,
   HiOutlineDotsHorizontal 
 } from "react-icons/hi";
+import { TodoContext } from "../../TodoContext";
 import "./OverflowMenu.css";
 
 function OverflowMenu({ todoItem, onSelectedOption }) {
+  const {
+    setOpenTaskModal, 
+    setIsEditTask,
+    setTask
+  } = React.useContext(TodoContext);
   const [isOpen, setIsOpen] = React.useState(false);
   const menuRef = React.useRef(null);
   
-  const toggleIsOpen = () => {
+  const toggleIsOpen = (event) => {
+    event.stopPropagation();
     setIsOpen(prev => !prev);
   };
 
-  const handleOption = (option) => {
+  const handleOption = (event, option) => {
+    event.stopPropagation();
     onSelectedOption(option);
+    setIsOpen(false);
+  };
+
+  const handleEdit = (event) => {
+    event.stopPropagation();
+    setOpenTaskModal(true);
+    setIsEditTask(true);
+    setTask(todoItem);
     setIsOpen(false);
   };
 
@@ -63,7 +79,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
             (!todoItem.isCompleted && todoItem.status !== "archived") && (
               <>
                 <span
-                  onClick={() => { handleOption("complete"); }}
+                  onClick={(event) => { handleOption(event, "complete"); }}
                   className="overflowMenu-option complete"
                   role="menuitem"
                   tabIndex={0}
@@ -79,7 +95,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
             todoItem.status !== "archived" ? (
               <>
                 <span
-                  onClick={() => { handleOption("archive"); }}
+                  onClick={(event) => { handleOption(event, "archive"); }}
                   className="overflowMenu-option archive"
                   role="menuitem"
                   tabIndex={0}
@@ -96,7 +112,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
           {
             (todoItem.status === "archived" || todoItem.isCompleted) ? (
               <span
-                onClick={() => { handleOption("active"); }}
+                onClick={(event) => { handleOption(event, "active"); }}
                 className="overflowMenu-option active"
                 role="menuitem"
                 tabIndex={0}
@@ -106,7 +122,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
               </span>
             ): (
               <span
-                onClick={() => { handleOption("edit"); }}
+                onClick={handleEdit}
                 className="overflowMenu-option edit"
                 role="menuitem"
                 tabIndex={0}
@@ -118,7 +134,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
           }
 
           <span
-            onClick={() => { handleOption("delete"); }}
+            onClick={(event) => { handleOption(event, "delete"); }}
             className="overflowMenu-option delete"
             role="menuitem"
             tabIndex={0}
