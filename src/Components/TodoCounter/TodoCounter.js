@@ -10,8 +10,8 @@ function TodoCounter() {
       {
         totalTodos === 0 ? (
           <>
-            <h1 className="todoTitle">¡Bienvenido a tu lista de misiones!</h1>
-            <p className="adviceText">Comienza agregando nuevas misiones para mantenerte organizado y enfocado.</p>
+            <h1 className="todoTitle">¡Bienvenid@ a tu lista de misiones!</h1>
+            <p className="adviceText">Comienza agregando nuevas misiones para mantenerte al dia de tus actividades.</p>
           </>
         ) :
         completedTodos === 0 ? (
