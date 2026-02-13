@@ -1,0 +1,169 @@
+/* Container */
+.taskInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #2c3e50;
+  margin-top: 1rem;
+}
+
+/* Header */
+.taskInfoHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.taskInfoHeadLeft {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+.statusBadge {
+	font-size: 0.8rem;
+	padding: 0.25rem 0.6rem;
+	border-radius: 999px;
+	text-transform: capitalize;
+	font-weight: 700;
+}
+
+.status-inprogress {
+	background: linear-gradient(90deg,#ffd27a,#ff9f43);
+	color: #2c3e50;
+}
+
+.status-pending {
+	background: #f1c40f;
+	color: #2c3e50;
+}
+
+.status-completed {
+	background: #2ecc71;
+	color: #ffffff;
+}
+
+.status-archived {
+	background: #bdc3c7;
+	color: #2c3e50;
+}
+
+/* Title & subtitle */
+.taskTitle {
+	margin: 0;
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #2c3e50;
+}
+
+.taskSubtitle {
+	margin: 0;
+	color: #7f8c8d;
+	font-size: 0.95rem;
+}
+
+.completed {
+	text-decoration: line-through;
+	color: #95a5a6;
+}
+
+/* Sections */
+.sectionHeading {
+	margin: 0 0 0.5rem 0;
+	font-size: 0.95rem;
+	color: #007fff;
+	font-weight: 700;
+}
+
+.taskDescription p {
+	margin: 0;
+	color: #34495e;
+	line-height: 1.4;
+}
+
+/* Objectives */
+.taskObjectives {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.objectivesList {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.objectiveRow {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.5rem;
+	background: #f8f9fa;
+	border-radius: 6px;
+	border-left: 3px solid #007fff;
+}
+
+.objectiveRow input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	accent-color: #007fff;
+}
+
+.objectiveText {
+	flex: 1;
+	color: #2c3e50;
+}
+
+.objectiveCompleted {
+	opacity: 0.7;
+	text-decoration: line-through;
+}
+
+.noObjectives {
+	margin: 0;
+	color: #95a5a6;
+}
+
+/* Footer actions */
+.taskFooter {
+	display: flex;
+	gap: 0.75rem;
+	justify-content: flex-end;
+	margin-top: 0.25rem;
+  margin-top: 1rem;
+}
+
+.taskBtn {
+	padding: 0.6rem 1rem;
+	border-radius: 6px;
+	border: none;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.taskBtn.primary {
+	background: #007fff;
+	color: #ffffff;
+}
+
+.taskBtn.secondary {
+	background: #ecf0f1;
+	color: #2c3e50;
+	border: 1px solid #d0d7de;
+}
+
+.taskBtn.ghost {
+	background: transparent;
+	color: #717171;
+	font-size: 1rem;
+	padding: 0.25rem 0.5rem;
+}
+
+.taskBtn:active {
+	transform: translateY(1px);
+}
+
+/* Minor utilities */
+.taskInfoActions { display: flex; gap: 0.5rem; align-items: center; }
+

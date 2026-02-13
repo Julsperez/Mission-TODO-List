@@ -1,9 +1,10 @@
 export { CreateTodoButton } from './CreateTodoButton/CreateTodoButton';
 export { ListDivider } from './ListDivider/ListDivider';
+export { Modal } from './Modal/Modal';
 export { OverflowMenu } from './OverflowMenu/OverflowMenu';
 export { TodoCounter } from './TodoCounter/TodoCounter';
+export { TodoForm } from './TodoForm/TodoForm';
 export { TodoItem } from './TodoItem/TodoItem';
 export { TodoList } from './TodoList/TodoList';
 export { TodoSearch } from './TodoSearch/TodoSearch';
-export { Modal } from './Modal/Modal';
-export { TodoForm } from './TodoForm/TodoForm';
+export { TodoShowInfo } from './TodoShowInfo/TodoShowInfo';

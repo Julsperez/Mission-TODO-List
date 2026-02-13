@@ -2,7 +2,7 @@ div.modalContainer {
     position: absolute;
     background: white;
     width: 85%;
-    height: 50%;
+    /* height: 50%; */
     top: 5%;
     left: 50%;
     transform: translate(-50%, 0%);

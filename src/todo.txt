@@ -2,6 +2,7 @@ https://platzi.com/cursos/patrones-diseno-creacionales/
 https://platzi.com/cursos/arrays/
 https://platzi.com/buscar/?search=animaciones%20css&filters=course
 https://react-icons.github.io/react-icons/icons/hi/
+https://platzi.com/cursos/react-patrones-render/
 
 
 TODOS

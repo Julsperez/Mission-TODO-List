@@ -7,7 +7,8 @@ import {
 	TodoList, 
 	TodoSearch, 
 	Modal,
-  TodoForm
+  TodoForm,
+  TodoShowInfo
 } from '../Components';
 import "./App.css"
 
@@ -40,7 +41,6 @@ function AppContext() {
     if (isEditFlag) {
       const index = todosArray.findIndex(todo => todo.missionId === newTodo.missionId);
       todosArray[index] = newTodo;
-      console.log(todosArray[index]);
     } else {
       todosArray.unshift(newTodo);
     }
@@ -75,10 +75,11 @@ function AppContext() {
                 </button>
               </div>
 							{isShowTaskInfo ? (
-								<>
-									<p>Task info</p>
-									{task && <pre>{JSON.stringify(task, null, 2)}</pre>}
-								</>
+                <TodoShowInfo 
+                  task={task} 
+                  onClose={handleCloseModal} 
+                  onEdit={() => setIsEditTask(true)}
+                />
 							) : 
                 <TodoForm 
                   task={task} 
