@@ -18,7 +18,7 @@ h2.appLoadingMessage {
     color: white;
     font-size: xxx-large;
     text-align: center;
-    margin: 50% auto;
+    margin: 0 auto;
 }
 
 div.appContainerHeader {
@@ -32,6 +32,12 @@ div.appHeaderActions {
     justify-content: space-between;
 }
 
+div.modalButton {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+
 button.closeButtonModal {
     border: none;
     width: 30px;
@@ -41,4 +47,6 @@ button.closeButtonModal {
     color: red;
     background: none;
     display: flex;
+    position:absolute;
+    z-index: 10;
 }

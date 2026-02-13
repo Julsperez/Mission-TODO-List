@@ -4,7 +4,14 @@ import { useLocalStorage } from './useLocalStorage';
 const TodoContext = React.createContext();
 
 function TodoProvider({ children }) {
-  // Custom hook para manejar el localStorage
+	
+	const matchByTitle = (todos, searchValue) => {
+		return todos.filter(todo => 
+			todo.title.toLowerCase().includes(searchValue.toLowerCase())
+		);
+	};
+  
+	// Custom hook para manejar el localStorage
 	const { 
 		item: todos, 
 		updateItem: setTodos, 
@@ -12,19 +19,13 @@ function TodoProvider({ children }) {
 		error 
 	} = useLocalStorage('defaultTodosV1', []); // guardar defaultTodosV1 en archivo .env como TODOS_KEY
 
-	const matchByTitle = (todos, searchValue) => {
-		return todos.filter(todo => 
-			todo.title.toLowerCase().includes(searchValue.toLowerCase())
-		);
-	}
-
 	// Componente padre debe manejar los estados de los componentes hijos
   const [searchValue, setSearchValue] = React.useState(''); 
 	const [openTaskModal, setOpenTaskModal] = React.useState(false);
 	const [isEditTask, setIsEditTask] = React.useState(false);
 	const [isShowTaskInfo, setIsShowTaskInfo] = React.useState(false);
 	const [task, setTask] = React.useState({});
-
+	 
 	// Estados derivados, son variables calculadas a partir de otros estados
   const totalTodos = todos.length;
   const completedTodos = todos.filter(todo => !!todo.isCompleted).length;
@@ -32,15 +33,15 @@ function TodoProvider({ children }) {
 
 	return (
 		<TodoContext.Provider value={{
+			completedTodos,
+			error,
+			loading,
+			totalTodos,
+			searchedTodos,
 			todos,
 			setTodos,
-			loading,
-			error,
 			searchValue,
 			setSearchValue,
-			totalTodos,
-			completedTodos,
-			searchedTodos,
 			openTaskModal,
 			setOpenTaskModal,
 			isEditTask,

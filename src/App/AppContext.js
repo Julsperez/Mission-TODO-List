@@ -12,18 +12,20 @@ import {
 import "./App.css"
 
 function AppContext() {
-  const { 
-		loading, 
-		error, 
-		searchedTodos, 
-		openTaskModal, 
-		setOpenTaskModal, 
-		isEditTask, 
-		setIsEditTask, 
-		isShowTaskInfo, 
-		setIsShowTaskInfo,
-		setTask,
-		task
+  const {
+    error,
+    loading,
+    searchedTodos,
+    todos,
+    setTodos,
+    openTaskModal,
+    setOpenTaskModal,
+    isEditTask,
+    setIsEditTask,
+    isShowTaskInfo,
+    setIsShowTaskInfo,
+    task,
+    setTask
 	} = React.useContext(TodoContext);
 
 	const handleCloseModal = () => {
@@ -33,14 +35,26 @@ function AppContext() {
 		setTask({});
 	};
 
+  const handleSubmitTodo = (newTodo, isEditFlag) => {
+    const todosArray = todos;
+    if (isEditFlag) {
+      const index = todosArray.findIndex(todo => todo.missionId === newTodo.missionId);
+      todosArray[index] = newTodo;
+      console.log(todosArray[index]);
+    } else {
+      todosArray.unshift(newTodo);
+    }
+    setTodos(todosArray);
+    handleCloseModal();
+  };
+
 	return (
 		<div id="app-container" className='AppContainer'>
-			{loading ? (
-				<h2 className='appLoadingMessage'>Cargando datos de misiones...</h2>
-			) :
-			error ? (
-				<h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> 
-			) : (
+			{loading ? 
+        <h2 className='appLoadingMessage'>Cargando datos de misiones...</h2> :
+			error ? 
+        <h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> : 
+      (
 				<>
 					<TodoSearch/>
 					<div className='appContainerHeader'>
@@ -55,23 +69,24 @@ function AppContext() {
 
 					{openTaskModal && (
 						<Modal>
-							<button onClick={handleCloseModal} className="closeButtonModal">
-                <HiOutlineXCircle />
-              </button>
-							{isEditTask ? ( 
-								<>
-									<p>Form to edit task</p>
-									{task && <pre>{JSON.stringify(task, null, 2)}</pre>}
-								</>
-							) :
-							isShowTaskInfo ? (
+							<div className="modalButton">
+                <button onClick={handleCloseModal} className="closeButtonModal">
+                  <HiOutlineXCircle/>
+                </button>
+              </div>
+							{isShowTaskInfo ? (
 								<>
 									<p>Task info</p>
 									{task && <pre>{JSON.stringify(task, null, 2)}</pre>}
 								</>
-							) : (
-                <TodoForm></TodoForm>
-							)}
+							) : 
+                <TodoForm 
+                  task={task} 
+                  editView={isEditTask} 
+                  onSubmit={handleSubmitTodo}
+                  onCancel={handleCloseModal}
+                />
+              }
 						</Modal>
 					)}
 				</>
