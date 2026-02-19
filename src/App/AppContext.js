@@ -56,7 +56,7 @@ function AppContext() {
         <h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> : 
       (
 				<>
-					<TodoSearch/>
+					
 					<div className='appContainerHeader'>
 						<TodoCounter/>
 					</div>
@@ -66,7 +66,7 @@ function AppContext() {
 						): <h2 className='appLoadingMessage'>¡Crea tu primera misión espacial!</h2>
 					}
 					<CreateTodoButton setOpenTaskModal={setOpenTaskModal}/>
-
+          <TodoSearch/>
 					{openTaskModal && (
 						<Modal>
 							<div className="modalButton">
@@ -90,6 +90,7 @@ function AppContext() {
               }
 						</Modal>
 					)}
+          
 				</>
 			)}
 		</div>

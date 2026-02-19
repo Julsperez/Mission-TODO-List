@@ -2,7 +2,7 @@ div.listDivider {
   display: flex;
   flex-direction: column;
   color: white;
-  margin: 1rem;
+  margin: 1rem 0;
 }
 
 div.listDivider h3.dividerText {

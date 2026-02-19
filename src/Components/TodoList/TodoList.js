@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { TodoContext } from "../../TodoContext";
 import { HiCheck } from "react-icons/hi";
 import { ListDivider, TodoItem } from "../";
@@ -33,6 +33,30 @@ function TodoList() {
   const [pillIndex, setPillIndex] = React.useState(0);
   const [filterTodos, setFilterTodos] = React.useState(searchedTodos);
   const [dividerText, setDividerText] = React.useState("Todas las misiones");
+  
+  const headerRef = useRef(null);
+  const [isPinned, setIsPinned] = React.useState(false);
+  useEffect(() => {
+    const cachedRef = headerRef.current;
+    if (!cachedRef) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Si el elemento deja de estar al 100% en su posición original
+        setIsPinned(entry.intersectionRatio < 1);
+      },
+      {
+        threshold: [1],
+        // El margin negativo en el top fuerza la activación 
+        // justo cuando toca el borde superior
+        rootMargin: '-9px 0px 0px 0px', 
+      }
+    );
+
+    observer.observe(cachedRef);
+
+    // Limpieza al desmontar el componente
+    return () => observer.disconnect();
+  }, []);
   
   useEffect(() => {
     handleSelectedPill(pillIndex);
@@ -73,7 +97,7 @@ function TodoList() {
 
   return (
     <div className="todoListContainer">
-      <div className="todoListHeader">
+      <div ref={headerRef} className={`todoListHeader ${isPinned ? 'is-pinned': ''}`}>
         {
           [0,1,2].map(index => (
             <span key={index} 

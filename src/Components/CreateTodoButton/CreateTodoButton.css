@@ -8,7 +8,7 @@ button.createTodoButton {
     cursor: pointer;
     text-align: center;
     position: fixed;
-    bottom: 35px;
+    bottom: 65px;
     right: 15px;
     width: 70px;
     height: 70px;

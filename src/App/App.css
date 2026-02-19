@@ -1,6 +1,6 @@
 div#app-container {
     --background-opacity: 0.6;
-    padding: 2rem;
+    padding: 1rem;
     background: linear-gradient(
         135deg,
         rgba(2, 0, 36,var(--background-opacity)) 0%, 

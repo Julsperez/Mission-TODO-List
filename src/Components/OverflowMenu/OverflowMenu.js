@@ -5,6 +5,7 @@ import {
   HiOutlineTrash, 
   HiOutlineReply,
   HiOutlineArchive,
+  HiOutlineClock,
   HiOutlineDotsHorizontal 
 } from "react-icons/hi";
 import { TodoContext } from "../../TodoContext";
@@ -87,6 +88,17 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                   Completar 
                   <HiCheck className="option-icon" />
                 </span>
+
+              
+                {/* {<span
+                  onClick={(event) => { handleOption(event, "pomodoro"); }}
+                  className="overflowMenu-option pomodoro"
+                  role="menuitem"
+                  tabIndex={0}
+                >
+                  Activar Pomodoro
+                  <HiOutlineClock className="option-icon" />
+                </span>} */}
               </>
             )
           }
