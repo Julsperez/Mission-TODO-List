@@ -24,7 +24,7 @@ import "./TodoList.css";
 
 // function TodoList({ onTodoUpdated, searchedTodos }) {
 function TodoList() {
-  const { setTodos, searchedTodos } = React.useContext(TodoContext);
+  const { setTodos, searchedTodos, todos } = React.useContext(TodoContext);
   // remove missions from main and side if they are completed
   // const mainMissions = todos.filter(todo => todo.typeofMission === "main");
   // const sideMissions = todos.filter(todo => todo.typeofMission === "side");
@@ -85,12 +85,13 @@ function TodoList() {
   // }, [searchedTodos, activeStrategy]);
 
   const updateTodos = (updatedTodo) => {
-    const newTodos = [...searchedTodos];
-    const todoIndex = newTodos.findIndex(todo => todo.missionId === updatedTodo.missionId);
+    let newTodos;
     if (updatedTodo.status === "deleted") {
-      newTodos.splice(todoIndex, 1);
+      newTodos = todos.filter(todo => todo.missionId !== updatedTodo.missionId);
     } else {
-      newTodos[todoIndex] = updatedTodo;
+      newTodos = todos.map(todo =>
+        todo.missionId === updatedTodo.missionId ? updatedTodo : todo
+      );
     }
     setTodos(newTodos);
   }

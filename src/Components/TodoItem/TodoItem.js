@@ -10,63 +10,61 @@ function TodoItem({ todo, onItemUpdated }) {
     setIsShowTaskInfo, 
     setTask 
   } = React.useContext(TodoContext);
-  const [todoItem, setTodoItem] = React.useState(todo);
+
   const handleSelectedOption = (option) => {
-    if (option === "complete" && !todoItem.isCompleted) {
-      todoItem.isCompleted = true;
+    let updatedTodo = { ...todo };
+    if (option === "complete" && !updatedTodo.isCompleted) {
+      updatedTodo.isCompleted = true;
     }
     if (option === "active") {
-      todoItem.isCompleted = false;
-      todoItem.status = "in-progress"; // create status type: todoItem.status = Item.COMPLETED
+      updatedTodo.isCompleted = false;
+      updatedTodo.status = "in-progress";
     }
     if (option === "archive") {
-      todoItem.status = "archived";
+      updatedTodo.status = "archived";
     }
     if (option === "delete") {
-      todoItem.status = "deleted";      
+      updatedTodo.status = "deleted";
     }
-
-    setTodoItem({...todoItem});
-    onItemUpdated(todoItem);
-  }
+    onItemUpdated(updatedTodo);
+  };
 
   const handleSelectedItem = () => {
     setOpenTaskModal(true);
     setIsShowTaskInfo(true);
-    setTask(todoItem);
+    setTask(todo);
   };
 
   return (
-    // Agregar doble elipsis de drag and drop
     <div 
       onClick={handleSelectedItem}
-      className={`missionCard ${todoItem.status === "archived" && "archived"}`}>
+      className={`missionCard ${todo.status === "archived" && "archived"}`}>
       <div className="missionCard-header">
         <span className={`
           missionLabel 
-          ${todoItem.typeofMission === "side" ? "side" : "main"}
-          ${todoItem.status === "archived" && "archived"}
+          ${todo.typeofMission === "side" ? "side" : "main"}
+          ${todo.status === "archived" && "archived"}
         `}>
-          {todoItem.typeofMission}
+          {todo.typeofMission}
         </span>
         <OverflowMenu 
-          todoItem={todoItem}
+          todoItem={todo}
           onSelectedOption={handleSelectedOption}
         />
       </div>
       <h3 
         className={
           `missionCard-title ${
-            todoItem.isCompleted && 
+            todo.isCompleted && 
             "completed"}`}>
-          {todoItem.title}
+          {todo.title}
         </h3>
       <p 
         className={
           `missionCard-subtitle ${
-            todoItem.isCompleted && 
+            todo.isCompleted && 
             "completed"}`}>
-          {todoItem.subtitle}
+          {todo.subtitle}
         </p>
     </div>
   );

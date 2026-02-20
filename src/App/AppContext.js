@@ -37,14 +37,15 @@ function AppContext() {
 	};
 
   const handleSubmitTodo = (newTodo, isEditFlag) => {
-    const todosArray = todos;
+    let updatedTodos;
     if (isEditFlag) {
-      const index = todosArray.findIndex(todo => todo.missionId === newTodo.missionId);
-      todosArray[index] = newTodo;
+      updatedTodos = todos.map(todo =>
+        todo.missionId === newTodo.missionId ? newTodo : todo
+      );
     } else {
-      todosArray.unshift(newTodo);
+      updatedTodos = [newTodo, ...todos];
     }
-    setTodos(todosArray);
+    setTodos(updatedTodos);
     handleCloseModal();
   };
 
