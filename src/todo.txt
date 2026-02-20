@@ -32,6 +32,9 @@ localStorage.removeItem('defaultTodosV1');
 //   objectives; // Array of Objective objects
 // };
 
+Suitable: "Replace the select elements for 'Tipo de Misión' and 'Estado' in TodoForm with segmented control buttons. Style the controls to match the form, ensure mobile-first responsiveness, and verify that the new styles do not break any existing CSS rules."
+Gave: Modify the TodoForm to use a segmented control buttons in the group for Tipo de Mision y Estado. Avoid to use select elements due to there are few options. So, change the selects for two segmented controls. Give them styles that match with the form. Verify that the styles generated does not broke any other css rule and keep always the mobile first perspective.
+
 const storageTodos = [
   {
     missionId: 1,

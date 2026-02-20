@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { HiCheck } from "react-icons/hi";
 import { TodoContext } from "../../TodoContext";
 
 import "./TodoForm.css";
 
 function TodoForm({ onSubmit, editView, task, onCancel }) {
-  const { setOpenTaskModal } = React.useContext(TodoContext);
+  const { setOpenTaskModal, openTaskModal } = React.useContext(TodoContext);
   const generateRandomId = () => Math.floor(Math.random() * 1000000);
   const [formData, setFormData] = useState({
     missionId: generateRandomId(),
@@ -16,6 +17,23 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
     typeofMission: "main",
     objectives: []
   });
+
+  const inputTituloRef = useRef(null);
+  useEffect(() => {
+    if (openTaskModal) {
+      // Usamos un pequeño delay o requestAnimationFrame 
+      // para asegurar que el modal ya esté visible en el DOM
+      const timer = setTimeout(() => {
+        if (inputTituloRef.current) {
+          inputTituloRef.current.focus();
+        }
+      }, 100); // 100ms suelen ser suficientes para la transición del modal
+
+      return () => clearTimeout(timer);
+    }
+  }, [openTaskModal]);
+
+  // if (!openTaskModal) return null
 
   
   React.useEffect(() => {
@@ -82,10 +100,14 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
           <h3 className="todoForm-sectionTitle">Información Básica</h3>
           
           <div className="todoForm-group">
-            <label htmlFor="title" className="todoForm-label">Título *</label>
+            <label htmlFor="title" className="todoForm-label">
+              Título 
+              <span className="required-field">* requerido</span>
+            </label>
             <input
               type="text"
               id="title"
+              ref={inputTituloRef}
               name="title"
               value={formData.title}
               onChange={handleInputChange}
@@ -127,35 +149,58 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
           <h3 className="todoForm-sectionTitle">Estado</h3>
           
           <div className="todoForm-group">
-            <label htmlFor="typeofMission" className="todoForm-label">Tipo de Misión</label>
-            <select
-              id="typeofMission"
-              name="typeofMission"
-              value={formData.typeofMission}
-              onChange={handleInputChange}
-              className="todoForm-select"
-            >
-              <option value="main">Principal (Main)</option>
-              <option value="side">Secundaria (Side)</option>
-            </select>
+            <label className="todoForm-label">Tipo de Misión</label>
+            <div className="segmentedControl" role="group" aria-label="Tipo de Misión">
+              <button
+                type="button"
+                className={`segmentedControl-btn${formData.typeofMission === 'main' ? ' active' : ''}`}
+                onClick={() => setFormData(prev => ({ ...prev, typeofMission: 'main' }))}
+                aria-pressed={formData.typeofMission === 'main'}
+              >
+                Principal (Main)
+              </button>
+              <button
+                type="button"
+                className={`segmentedControl-btn${formData.typeofMission === 'side' ? ' active' : ''}`}
+                onClick={() => setFormData(prev => ({ ...prev, typeofMission: 'side' }))}
+                aria-pressed={formData.typeofMission === 'side'}
+              >
+                Secundaria (Side)
+              </button>
+            </div>
           </div>
 
           <div className="todoForm-group">
-            <label htmlFor="status" className="todoForm-label">Estado</label>
-            <select
-              id="status"
-              name="status"
-              value={formData.status}
-              onChange={handleInputChange}
-              className="todoForm-select"
-            >
-              <option value="in-progress">En Progreso</option>
-              <option value="completed">Completado</option>
-              <option value="archived">Archivado</option>
-            </select>
+            <label className="todoForm-label">Estado</label>
+            <div className="segmentedControl" role="group" aria-label="Estado">
+              <button
+                type="button"
+                className={`segmentedControl-btn${formData.status === 'in-progress' ? ' active' : ''}`}
+                onClick={() => setFormData(prev => ({ ...prev, status: 'in-progress' }))}
+                aria-pressed={formData.status === 'in-progress'}
+              >
+                En Progreso
+              </button>
+              <button
+                type="button"
+                className={`segmentedControl-btn${formData.status === 'completed' ? ' active' : ''}`}
+                onClick={() => setFormData(prev => ({ ...prev, status: 'completed' }))}
+                aria-pressed={formData.status === 'completed'}
+              >
+                Completado
+              </button>
+              <button
+                type="button"
+                className={`segmentedControl-btn${formData.status === 'archived' ? ' active' : ''}`}
+                onClick={() => setFormData(prev => ({ ...prev, status: 'archived' }))}
+                aria-pressed={formData.status === 'archived'}
+              >
+                Archivado
+              </button>
+            </div>
           </div>
 
-          <div className="todoForm-group todoForm-checkboxGroup">
+          {/* <div className="todoForm-group todoForm-checkboxGroup">
             <label htmlFor="isCompleted" className="todoForm-checkboxLabel">
               <input
                 type="checkbox"
@@ -167,7 +212,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
               />
               <span>Marcar como completado</span>
             </label>
-          </div>
+          </div> */}
         </div>
 
         {/* Objectives Section */}
@@ -188,7 +233,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
               onClick={handleAddObjective}
               className="todoForm-button addObjective"
             >
-              + Añadir
+              <HiCheck />
             </button>
           </div>
 
