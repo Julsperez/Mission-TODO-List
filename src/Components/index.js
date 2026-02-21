@@ -8,3 +8,4 @@ export { TodoItem } from './TodoItem/TodoItem';
 export { TodoList } from './TodoList/TodoList';
 export { TodoSearch } from './TodoSearch/TodoSearch';
 export { TodoShowInfo } from './TodoShowInfo/TodoShowInfo';
+export { PomodoroTimer } from './PomodoroTimer/PomodoroTimer';

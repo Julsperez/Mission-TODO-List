@@ -1,14 +1,15 @@
 import React from "react";
 import { HiOutlineXCircle } from "react-icons/hi";
 import { TodoContext } from "../TodoContext";
-import { 
-	CreateTodoButton, 
-	TodoCounter, 
-	TodoList, 
-	TodoSearch, 
-	Modal,
+import {
+  CreateTodoButton,
+  TodoCounter,
+  TodoList,
+  TodoSearch,
+  Modal,
   TodoForm,
-  TodoShowInfo
+  TodoShowInfo,
+  PomodoroTimer
 } from '../Components';
 import "./App.css"
 
@@ -26,15 +27,18 @@ function AppContext() {
     isShowTaskInfo,
     setIsShowTaskInfo,
     task,
-    setTask
-	} = React.useContext(TodoContext);
+    setTask,
+    isShowPomodoro,
+    setIsShowPomodoro
+  } = React.useContext(TodoContext);
 
-	const handleCloseModal = () => {
-		setOpenTaskModal(false);
-		setIsEditTask(false);
-		setIsShowTaskInfo(false);
-		setTask({});
-	};
+  const handleCloseModal = () => {
+    setOpenTaskModal(false);
+    setIsEditTask(false);
+    setIsShowTaskInfo(false);
+    setIsShowPomodoro(false);
+    setTask({});
+  };
 
   const handleSubmitTodo = (newTodo, isEditFlag) => {
     let updatedTodos;
@@ -49,53 +53,55 @@ function AppContext() {
     handleCloseModal();
   };
 
-	return (
-		<div id="app-container" className='AppContainer'>
-			{loading ? 
+  return (
+    <div id="app-container" className='AppContainer'>
+      {loading ?
         <h2 className='appLoadingMessage'>Cargando datos de misiones...</h2> :
-			error ? 
-        <h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> : 
-      (
-				<>
-					
-					<div className='appContainerHeader'>
-						<TodoCounter/>
-					</div>
-					{
-						!!searchedTodos.length ? (
-							<TodoList/>
-						): <h2 className='appLoadingMessage'>¡Crea tu primera misión espacial!</h2>
-					}
-					<CreateTodoButton setOpenTaskModal={setOpenTaskModal}/>
-          <TodoSearch/>
-					{openTaskModal && (
-						<Modal>
-							<div className="modalButton">
-                <button onClick={handleCloseModal} className="closeButtonModal">
-                  <HiOutlineXCircle/>
-                </button>
+        error ?
+          <h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> :
+          (
+            <>
+
+              <div className='appContainerHeader'>
+                <TodoCounter />
               </div>
-							{isShowTaskInfo ? (
-                <TodoShowInfo 
-                  task={task} 
-                  onClose={handleCloseModal} 
-                  onEdit={() => setIsEditTask(true)}
-                />
-							) : 
-                <TodoForm 
-                  task={task} 
-                  editView={isEditTask} 
-                  onSubmit={handleSubmitTodo}
-                  onCancel={handleCloseModal}
-                />
+              {
+                !!searchedTodos.length ? (
+                  <TodoList />
+                ) : <h2 className='appLoadingMessage'>¡Crea tu primera misión espacial!</h2>
               }
-						</Modal>
-					)}
-          
-				</>
-			)}
-		</div>
-	);
+              <CreateTodoButton setOpenTaskModal={setOpenTaskModal} />
+              <TodoSearch />
+              {openTaskModal && (
+                <Modal>
+                  <div className="modalButton">
+                    <button onClick={handleCloseModal} className="closeButtonModal">
+                      <HiOutlineXCircle />
+                    </button>
+                  </div>
+                  {isShowTaskInfo ? (
+                    <TodoShowInfo
+                      task={task}
+                      onClose={handleCloseModal}
+                      onEdit={() => setIsEditTask(true)}
+                    />
+                  ) : isShowPomodoro ? (
+                    <PomodoroTimer taskName={task.title} />
+                  ) :
+                    <TodoForm
+                      task={task}
+                      editView={isEditTask}
+                      onSubmit={handleSubmitTodo}
+                      onCancel={handleCloseModal}
+                    />
+                  }
+                </Modal>
+              )}
+
+            </>
+          )}
+    </div>
+  );
 }
 
 export { AppContext };
