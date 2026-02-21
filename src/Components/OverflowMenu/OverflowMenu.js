@@ -1,25 +1,25 @@
 import React from "react";
-import { 
-  HiCheck, 
-  HiPencilAlt, 
-  HiOutlineTrash, 
+import {
+  HiCheck,
+  HiPencilAlt,
+  HiOutlineTrash,
   HiOutlineReply,
   HiOutlineArchive,
   HiOutlineClock,
-  HiOutlineDotsHorizontal 
+  HiOutlineDotsHorizontal
 } from "react-icons/hi";
 import { TodoContext } from "../../TodoContext";
 import "./OverflowMenu.css";
 
 function OverflowMenu({ todoItem, onSelectedOption }) {
   const {
-    setOpenTaskModal, 
+    setOpenTaskModal,
     setIsEditTask,
     setTask
   } = React.useContext(TodoContext);
   const [isOpen, setIsOpen] = React.useState(false);
   const menuRef = React.useRef(null);
-  
+
   const toggleIsOpen = (event) => {
     event.stopPropagation();
     setIsOpen(prev => !prev);
@@ -85,12 +85,12 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                   role="menuitem"
                   tabIndex={0}
                 >
-                  Completar 
+                  Completar
                   <HiCheck className="option-icon" />
                 </span>
 
-              
-                {/* {<span
+
+                {<span
                   onClick={(event) => { handleOption(event, "pomodoro"); }}
                   className="overflowMenu-option pomodoro"
                   role="menuitem"
@@ -98,7 +98,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                 >
                   Activar Pomodoro
                   <HiOutlineClock className="option-icon" />
-                </span>} */}
+                </span>}
               </>
             )
           }
@@ -112,13 +112,13 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                   role="menuitem"
                   tabIndex={0}
                 >
-                  Archivar 
+                  Archivar
                   <HiOutlineArchive className="option-icon" />
                 </span>
               </>
             ) : (
-            <>
-            </>)
+              <>
+              </>)
           }
 
           {
@@ -129,17 +129,17 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                 role="menuitem"
                 tabIndex={0}
               >
-                Reactivar 
+                Reactivar
                 <HiOutlineReply className="option-icon" />
               </span>
-            ): (
+            ) : (
               <span
                 onClick={handleEdit}
                 className="overflowMenu-option edit"
                 role="menuitem"
                 tabIndex={0}
               >
-                Editar 
+                Editar
                 <HiPencilAlt className="option-icon" />
               </span>
             )
@@ -151,7 +151,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
             role="menuitem"
             tabIndex={0}
           >
-            Borrar 
+            Borrar
             <HiOutlineTrash className="option-icon" />
           </span>
         </div>
