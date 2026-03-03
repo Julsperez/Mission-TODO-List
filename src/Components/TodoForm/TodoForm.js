@@ -35,15 +35,17 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
 
   // if (!openTaskModal) return null
 
-  
+
   React.useEffect(() => {
     if (editView && Object.keys(task).length !== 0) {
-      setFormData({...task});
+      setFormData({ ...task });
     }
   }, [task]);
 
 
   const [newObjective, setNewObjective] = useState("");
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingDescription, setEditingDescription] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -74,6 +76,38 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
       ...prev,
       objectives: prev.objectives.filter((_, i) => i !== index)
     }));
+    if (editingIndex === index) {
+      setEditingIndex(null);
+    }
+  };
+
+  const handleEditObjective = (index, description) => {
+    setEditingIndex(index);
+    setEditingDescription(description);
+  };
+
+  const handleSaveEditObjective = (index) => {
+    if (editingDescription.trim()) {
+      setFormData(prev => {
+        const newObjectives = [...prev.objectives];
+        newObjectives[index] = {
+          ...newObjectives[index],
+          description: editingDescription.trim()
+        };
+        return {
+          ...prev,
+          objectives: newObjectives
+        };
+      });
+      setEditingIndex(null);
+    } else {
+      // If empty, we can either cancel or remove it. Let's cancel for now.
+      setEditingIndex(null);
+    }
+  };
+
+  const handleCancelEditObjective = () => {
+    setEditingIndex(null);
   };
 
   const handleSubmit = (e) => {
@@ -93,15 +127,15 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
       <h2 className="todoForm-title">
         {editView ? "Editar Misión" : "Crear Nueva Misión"}
       </h2>
-      
+
       <div className="formBodyContainer">
         {/* Basic Info Section */}
         <div className="todoForm-section">
           <h3 className="todoForm-sectionTitle">Información Básica</h3>
-          
+
           <div className="todoForm-group">
             <label htmlFor="title" className="todoForm-label">
-              Título 
+              Título
               <span className="required-field">* requerido</span>
             </label>
             <input
@@ -147,7 +181,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
         {/* Status Section */}
         <div className="todoForm-section">
           <h3 className="todoForm-sectionTitle">Estado</h3>
-          
+
           <div className="todoForm-group">
             <label className="todoForm-label">Tipo de Misión</label>
             <div className="segmentedControl" role="group" aria-label="Tipo de Misión">
@@ -218,7 +252,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
         {/* Objectives Section */}
         <div className="todoForm-section">
           <h3 className="todoForm-sectionTitle">Objetivos</h3>
-          
+
           <div className="todoForm-objectivesInput">
             <input
               type="text"
@@ -241,7 +275,27 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
             {formData.objectives.map((objective, index) => (
               <div key={index} className="todoForm-objectiveItem">
                 <span className="objectiveIndex">{index + 1}.</span>
-                <span className="objectiveDescription">{objective.description}</span>
+                {editingIndex === index ? (
+                  <input
+                    type="text"
+                    className="todoForm-input editObjectiveInput"
+                    value={editingDescription}
+                    onChange={(e) => setEditingDescription(e.target.value)}
+                    onBlur={() => handleSaveEditObjective(index)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleSaveEditObjective(index);
+                      if (e.key === "Escape") handleCancelEditObjective();
+                    }}
+                    autoFocus
+                  />
+                ) : (
+                  <span
+                    className="objectiveDescription"
+                    onClick={() => handleEditObjective(index, objective.description)}
+                  >
+                    {objective.description}
+                  </span>
+                )}
                 <button
                   type="button"
                   onClick={() => handleRemoveObjective(index)}

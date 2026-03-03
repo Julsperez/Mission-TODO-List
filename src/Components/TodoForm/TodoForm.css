@@ -37,12 +37,14 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+
   .segmentedControl-btn {
     width: 100%;
     font-size: 0.9em;
     padding: 0.5rem;
   }
 }
+
 /* Form Container */
 .todoFormContainer {
   /* background-color: #ffffff;
@@ -77,9 +79,9 @@
 }
 
 .formBodyContainer {
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    margin-bottom: 30px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  margin-bottom: 30px;
 }
 
 /* Sections */
@@ -285,6 +287,22 @@
   color: #2c3e50;
   word-break: break-word;
   line-height: 1.4;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.objectiveDescription:hover {
+  background-color: #f0f7ff;
+}
+
+.editObjectiveInput {
+  flex: 1;
+  padding: 4px 8px !important;
+  font-size: 0.95em;
+  margin: -4px 0;
+  width: 0;
 }
 
 .todoForm-removeObjective {
@@ -420,9 +438,12 @@
   }
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
-  border: 2px solid #3b82f6; /* El azul que usas en tus tags */
+  border: 2px solid #3b82f6;
+  /* El azul que usas en tus tags */
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   transition: all 0.2s ease;
 }

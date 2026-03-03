@@ -1,8 +1,33 @@
 
+import React, { useContext } from "react";
+import { TodoContext } from "../../TodoContext";
 import "./TodoShowInfo.css";
 
 function TodoShowInfo({ task, onClose, onEdit }) {
+  const { todos, setTodos, setTask } = useContext(TodoContext);
+
   if (!task) return null;
+
+  const handleToggleObjective = (objectiveId) => {
+    // Encontrar la tarea y actualizar sus objetivos
+    const updatedObjectives = task.objectives.map(obj => {
+      if (obj.objectiveId === objectiveId) {
+        return { ...obj, isCompleted: !obj.isCompleted };
+      }
+      return obj;
+    });
+
+    const updatedTask = { ...task, objectives: updatedObjectives };
+
+    // Actualizar el estado global de todos
+    const updatedTodos = todos.map(todo =>
+      todo.missionId === task.missionId ? updatedTask : todo
+    );
+
+    setTodos(updatedTodos);
+    // Actualizar la tarea actual para reflejar cambios inmediatamente en la UI
+    setTask(updatedTask);
+  };
 
   const statusClass = (status) => {
     switch (status) {
@@ -21,7 +46,7 @@ function TodoShowInfo({ task, onClose, onEdit }) {
         <h2 className={`taskTitle ${task.isCompleted ? "completed" : ""}`}>{task.title}</h2>
         {task.subtitle && <p className={`taskSubtitle ${task.isCompleted ? "completed" : ""}`}>{task.subtitle}</p>}
       </div>
-      
+
       <div className="taskInfoHeader">
         <div className="taskInfoHeadLeft">
           <span className={`missionLabel ${task.typeofMission === "side" ? "side" : "main"}`}>
@@ -30,8 +55,8 @@ function TodoShowInfo({ task, onClose, onEdit }) {
           <span className={`statusBadge ${statusClass(task.status)}`}>
             {
               task.status === 'in-progress' ? "En progreso" :
-              task.status === 'completed' ? "Completada" :
-              "Archivada"
+                task.status === 'completed' ? "Completada" :
+                  "Archivada"
             }
           </span>
         </div>
@@ -47,9 +72,14 @@ function TodoShowInfo({ task, onClose, onEdit }) {
         <h3 className="sectionHeading">Objetivos</h3>
         {task.objectives && task.objectives.length > 0 ? (
           <div className="objectivesList">
-            {task.objectives.map((obj, i) => (
-              <label key={i} className={`objectiveRow ${obj.isCompleted ? "objectiveCompleted" : ""}`}>
-                {/* <input type="checkbox" checked={!!obj.isCompleted} readOnly /> */}
+            {task.objectives.map((obj) => (
+              <label key={obj.objectiveId} className={`objectiveRow ${obj.isCompleted ? "objectiveCompleted" : ""}`}>
+                <input
+                  type="checkbox"
+                  checked={!!obj.isCompleted}
+                  onChange={() => handleToggleObjective(obj.objectiveId)}
+                  className="objectiveCheckbox"
+                />
                 <span className="objectiveText">{obj.description}</span>
               </label>
             ))}

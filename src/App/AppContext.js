@@ -86,7 +86,7 @@ function AppContext() {
                       onEdit={() => setIsEditTask(true)}
                     />
                   ) : isShowPomodoro ? (
-                    <PomodoroTimer taskName={task.title} />
+                    <PomodoroTimer task={task} />
                   ) :
                     <TodoForm
                       task={task}

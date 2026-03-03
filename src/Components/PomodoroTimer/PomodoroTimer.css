@@ -2,32 +2,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background: rgba(26, 26, 46, 0.95);
     border-radius: 20px;
-    color: #fff;
-    border: 1px solid #97ca3f;
-    box-shadow: 0 0 20px rgba(151, 202, 63, 0.2);
+    color: #0d0c22;
     width: 100%;
     max-width: 320px;
-    margin: 0 auto;
+    margin: 2.5rem auto;
+    margin-bottom: 0;
 }
 
 .pomodoro-title {
     font-size: 1.4rem;
     margin-bottom: 20px;
-    color: #97ca3f;
+    color: #4aa4ff;
     text-align: center;
     word-break: break-word;
 }
 
+.pomodoro-description {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #919191;
+}
+
 .pomodoro-timer {
-    font-size: 4rem;
+    font-size: 5.8rem;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     margin: 20px 0;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(151, 202, 63, 0.5);
+    color: #ff4d4d;
+    text-shadow: 0 0 10px #0d0c2226;
 }
 
 .pomodoro-controls {
@@ -38,7 +45,7 @@
 
 .pomodoro-btn {
     background: transparent;
-    border: 2px solid #97ca3f;
+    border: 6px solid #97ca3f;
     color: #97ca3f;
     width: 60px;
     height: 60px;
@@ -46,7 +53,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -87,12 +94,69 @@
     font-style: italic;
 }
 
-@media (max-width: 480px) {
-    .pomodoro-container {
-        padding: 15px;
-    }
-    
-    .pomodoro-timer {
-        font-size: 3rem;
-    }
+.pomodoro-objectives {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1.5rem 1rem;
+    border-top: 2px solid #f0f0f0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.objectives-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.objective-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+}
+
+.objective-item:hover {
+    background: #f8f9fa;
+}
+
+.objective-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.objective-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #949494;
+    flex-shrink: 0;
+}
+
+.objective-text {
+    font-size: 1rem;
+    color: #2d2d2d;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    line-height: 1.4;
+}
+
+.objective-item.completed .objective-text {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.no-objectives {
+    font-size: 0.9rem;
+    color: #999;
+    text-align: center;
+    font-style: italic;
+    padding: 1rem;
 }

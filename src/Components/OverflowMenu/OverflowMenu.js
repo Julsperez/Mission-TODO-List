@@ -104,7 +104,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                     role="menuitem"
                     tabIndex={0}
                   >
-                    Activar Pomodoro
+                    Pomodoro
                     <HiOutlineClock className="option-icon" />
                   </span>
                 )}
