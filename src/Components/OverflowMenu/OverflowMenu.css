@@ -12,7 +12,8 @@ button.overflowMenu-button {
 
 button.overflowMenu-button:active,
 button.overflowMenu-button:hover {
-    color: white; /* Color más oscuro al pasar el cursor */
+    color: white;
+    /* Color más oscuro al pasar el cursor */
     background: #949494;
 }
 
@@ -38,7 +39,7 @@ span.overflowMenu-option {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 5px;    
+    gap: 5px;
     padding: 0.5rem;
     border-bottom: 1px solid #e0e0e0;
     border-radius: 6px 6px 0 0;
@@ -53,7 +54,7 @@ span.overflowMenu-option:last-child {
     border-bottom: none;
 }
 
-span.overflowMenu-option > .option-icon {
+span.overflowMenu-option>.option-icon {
     font-size: 1.3rem;
 }
 
@@ -66,7 +67,7 @@ span.active {
     color: dodgerblue;
 }
 
-span.archive  {
+span.archive {
     color: rgb(139, 30, 255);
 }
 
@@ -74,6 +75,6 @@ span.delete {
     color: orangered;
 }
 
-/* span.pomodoro {
+span.pomodoro {
     color: tomato;
-} */
+}

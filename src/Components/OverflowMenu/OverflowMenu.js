@@ -15,7 +15,8 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
   const {
     setOpenTaskModal,
     setIsEditTask,
-    setTask
+    setTask,
+    setIsShowPomodoro
   } = React.useContext(TodoContext);
   const [isOpen, setIsOpen] = React.useState(false);
   const menuRef = React.useRef(null);
@@ -90,15 +91,23 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                 </span>
 
 
-                {<span
-                  onClick={(event) => { handleOption(event, "pomodoro"); }}
-                  className="overflowMenu-option pomodoro"
-                  role="menuitem"
-                  tabIndex={0}
-                >
-                  Activar Pomodoro
-                  <HiOutlineClock className="option-icon" />
-                </span>}
+                {todoItem.status === "in-progress" && (
+                  <span
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setTask(todoItem);
+                      setOpenTaskModal(true);
+                      setIsShowPomodoro(true);
+                      setIsOpen(false);
+                    }}
+                    className="overflowMenu-option pomodoro"
+                    role="menuitem"
+                    tabIndex={0}
+                  >
+                    Pomodoro
+                    <HiOutlineClock className="option-icon" />
+                  </span>
+                )}
               </>
             )
           }
