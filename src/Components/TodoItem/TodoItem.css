@@ -33,17 +33,20 @@ span.missionLabel {
 }
 
 span.main {
-    background-color: #3498db; /* Azul */
+    background-color: #3498db;
+    /* Azul */
     color: #ffffff;
 }
 
 span.side {
-    background-color: #2ecc71; /* Verde */
+    background-color: #2ecc71;
+    /* Verde */
     color: #ffffff;
 }
 
 span.archived {
-    background-color: #bdc3c7; /* Gris claro */
+    background-color: #bdc3c7;
+    /* Gris claro */
     color: #2c3e50;
 }
 
@@ -55,7 +58,8 @@ span.archived::after {
 h3.missionCard-title.completed,
 p.missionCard-subtitle.completed {
     text-decoration: line-through;
-    color: #95a5a6; /* Color gris para indicar que está completado */
+    color: #95a5a6;
+    /* Color gris para indicar que está completado */
 }
 
 h3.missionCard-title {
@@ -71,3 +75,8 @@ p.missionCard-subtitle {
     margin: 0;
 }
 
+@media(min-width:768px) {
+    div.missionCard {
+        max-width: 240px;
+    }
+}

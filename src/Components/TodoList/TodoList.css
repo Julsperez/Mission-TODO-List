@@ -13,7 +13,8 @@
     top: 0.5rem;
     z-index: 1;
     transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
-    padding: 0.5rem; /* Un padding base para que no salte tanto */
+    padding: 0.5rem;
+    /* Un padding base para que no salte tanto */
 }
 
 .todoListHeader.is-pinned {
@@ -46,4 +47,13 @@ span.headerPill {
 
 .check-icon {
     font-size: 1.2rem;
+}
+
+@media(min-width:768px) {
+    .todoListPanelContent {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
 }

@@ -15,3 +15,12 @@ button.createTodoButton {
     border: none;
     box-shadow: 0px 4px 6px rgb(0 0 0 / 74%);
 }
+
+@media (min-width: 768px) {
+    button.createTodoButton {
+        bottom: 20px;
+        right: 13%;
+        position: absolute;
+        z-index: 2;
+    }
+}
