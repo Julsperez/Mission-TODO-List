@@ -9,10 +9,10 @@
   flex: 1;
   padding: 0.75rem 0.5rem;
   font-size: 0.95em;
-  border: 1px solid #bdc3c7;
+  border: 1px solid rgba(0, 212, 255, 0.2);
   border-radius: 6px;
-  background-color: #f6f6f6;
-  color: #2c3e50;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-secondary);
   font-family: inherit;
   font-weight: 600;
   cursor: pointer;
@@ -21,15 +21,15 @@
 }
 
 .segmentedControl-btn.active {
-  background-color: #ffffff;
-  color: #000000;
-  border-color: #007fff;
-  box-shadow: 0 0 0 3px rgba(0, 127, 255, 0.1);
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--color-text-primary);
+  border-color: var(--color-star-glow);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
 }
 
 .segmentedControl-btn:not(.active):hover {
-  background-color: #eaf6ff;
-  border-color: #007fff;
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.4);
 }
 
 @media (max-width: 768px) {
@@ -66,14 +66,14 @@
 .todoForm-title {
   font-size: 1.4em;
   font-weight: 700;
-  color: #2c3e50;
+  color: var(--color-text-primary);
   margin: 1rem 0;
   /* margin-bottom: 0.5rem; */
   text-align: center;
 }
 
 .required-field {
-  color: red;
+  color: #ff6b6b;
   margin-left: 0.5rem;
   font-weight: 100;
 }
@@ -100,7 +100,7 @@
 .todoForm-sectionTitle {
   font-size: 1.1em;
   font-weight: 600;
-  color: #007fff;
+  color: var(--color-star-glow);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -119,7 +119,7 @@
 .todoForm-label {
   font-size: 0.95em;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--color-text-secondary);
   display: block;
 }
 
@@ -129,26 +129,26 @@
 .todoForm-textarea {
   padding: 0.75rem;
   font-size: 0.95em;
-  border: 1px solid #bdc3c7;
+  border: 1px solid rgba(0, 212, 255, 0.22);
   border-radius: 6px;
   font-family: inherit;
   transition: all 0.3s ease;
-  color: #2c3e50;
-  background-color: #ffffff;
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .todoForm-input:focus,
 .todoForm-select:focus,
 .todoForm-textarea:focus {
   outline: none;
-  border-color: #007fff;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(0, 127, 255, 0.1);
+  border-color: rgba(0, 212, 255, 0.6);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.12);
 }
 
 .todoForm-input::placeholder,
 .todoForm-textarea::placeholder {
-  color: #95a5a6;
+  color: rgba(136, 146, 176, 0.55);
 }
 
 .todoForm-textarea {
@@ -162,7 +162,7 @@
 .todoForm-select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23007fff' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d4ff' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1.25rem;
@@ -171,8 +171,8 @@
 
 .todoForm-select option {
   padding: 0.5rem;
-  color: #2c3e50;
-  background-color: #ffffff;
+  color: var(--color-text-primary);
+  background-color: #0d0d3a;
 }
 
 /* Checkbox Group */
@@ -187,7 +187,7 @@
   gap: 0.75rem;
   cursor: pointer;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--color-text-primary);
   font-size: 0.95em;
 }
 
@@ -246,7 +246,7 @@
 }
 
 .todoForm-objectivesList::-webkit-scrollbar-track {
-  background-color: #ecf0f1;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 3px;
 }
 
@@ -264,27 +264,27 @@
   align-items: flex-start;
   gap: 0.75rem;
   padding: 0.75rem;
-  background-color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 0 6px 6px 0;
-  border-left: 3px solid #007fff;
+  border-left: 3px solid var(--color-star-glow);
   transition: all 0.2s ease;
   box-shadow: 4px 4px 6px -2px #00000033;
 }
 
 .todoForm-objectiveItem:hover {
-  box-shadow: 0 2px 8px rgba(0, 127, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.15);
 }
 
 .objectiveIndex {
   font-weight: 700;
-  color: #007fff;
+  color: var(--color-star-glow);
   min-width: 20px;
   text-align: center;
 }
 
 .objectiveDescription {
   flex: 1;
-  color: #2c3e50;
+  color: var(--color-text-primary);
   word-break: break-word;
   line-height: 1.4;
   cursor: pointer;
@@ -294,7 +294,7 @@
 }
 
 .objectiveDescription:hover {
-  background-color: #f0f7ff;
+  background: rgba(0, 212, 255, 0.08);
 }
 
 .editObjectiveInput {
@@ -332,11 +332,12 @@
   gap: 1rem;
   justify-content: flex-end;
   padding-top: 1rem;
-  /* border-top: 2px solid #ecf0f1; */
   width: 100%;
   position: sticky;
   bottom: -1rem;
-  background: #f6f6f6;
+  background: rgba(10, 10, 46, 0.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 212, 255, 0.12);
   padding-bottom: 1rem;
 }
 

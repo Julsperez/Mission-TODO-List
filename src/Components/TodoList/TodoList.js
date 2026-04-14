@@ -81,20 +81,26 @@ function TodoList() {
       </div>
       <div className="todoListPanel">
         <ListDivider dividerText={dividerText} />
-        {
-          !!filterTodos.length && (
-            <div className="todoListPanelContent">
-              {filterTodos.map(todo => (
-                <React.Fragment key={todo.missionId}>
-                  <TodoItem
-                    todo={todo}
-                    onItemUpdated={updateTodos}
-                  />
-                </React.Fragment>
-              ))}
-            </div>
-          )
-        }
+        {filterTodos.length === 0 ? (
+          <p className="emptyState">
+            {pillIndex === 0
+              ? "No hay misiones. ¡Crea tu primera misión, comandante!"
+              : pillIndex === 1
+              ? "Aún no has completado ninguna misión. ¡Sigue así!"
+              : "No hay misiones archivadas."}
+          </p>
+        ) : (
+          <div className="todoListPanelContent">
+            {filterTodos.map(todo => (
+              <React.Fragment key={todo.missionId}>
+                <TodoItem
+                  todo={todo}
+                  onItemUpdated={updateTodos}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

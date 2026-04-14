@@ -35,11 +35,12 @@ button.closeButtonModal {
     height: 30px;
     padding: 0;
     font-size: xx-large;
-    color: red;
+    color: #e05555;
     background: none;
     display: flex;
     position: absolute;
     z-index: 10;
+    cursor: pointer;
 }
 
 @media (min-width: 480px) {

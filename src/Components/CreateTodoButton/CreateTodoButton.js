@@ -1,8 +1,9 @@
 import "./CreateTodoButton.css";
 function CreateTodoButton({setOpenTaskModal}) {
   return (
-    <button 
-      className="createTodoButton" 
+    <button
+      aria-label="Crear nueva misión"
+      className="createTodoButton"
       onClick={() => setOpenTaskModal(true)}>
       +
     </button>

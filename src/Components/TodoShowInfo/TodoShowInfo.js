@@ -90,7 +90,7 @@ function TodoShowInfo({ task, onClose, onEdit }) {
       </div>
 
       <div className="taskFooter">
-        {/* <button className="taskBtn secondary" onClick={() => onEdit && onEdit(task)}>Editar</button> */}
+        <button className="taskBtn secondary" onClick={() => onEdit && onEdit()}>Editar</button>
         <button className="taskBtn primary" onClick={onClose}>Cerrar</button>
       </div>
     </div>

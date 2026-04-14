@@ -1,21 +1,32 @@
 div.missionCard {
-    background-color: #ffffff;
+    background: rgba(10, 10, 46, 0.78);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(0, 212, 255, 0.18);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    color: var(--color-text-primary);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    animation: cardEnter 0.3s ease;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     width: 85%;
     max-width: 250px;
     display: flex;
     flex-direction: column;
-    /* gap: 5px; */
     position: relative;
     margin: 1rem auto;
-    /* height: 90px; */
+}
+
+div.missionCard:hover {
+    border-color: rgba(0, 212, 255, 0.45);
+    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
 }
 
 div.missionCard.archived {
-    background-color: #e6e6e6;
-    color: #717171;
+    background: rgba(20, 20, 55, 0.5);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-muted);
 }
 
 div.missionCard-header {
@@ -33,21 +44,21 @@ span.missionLabel {
 }
 
 span.main {
-    background-color: #3498db;
-    /* Azul */
-    color: #ffffff;
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    color: #93c5fd;
 }
 
 span.side {
-    background-color: #2ecc71;
-    /* Verde */
-    color: #ffffff;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    color: #6ee7b7;
 }
 
 span.archived {
-    background-color: #bdc3c7;
-    /* Gris claro */
-    color: #2c3e50;
+    background: rgba(100, 100, 120, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--color-text-muted);
 }
 
 span.archived::after {
@@ -55,24 +66,28 @@ span.archived::after {
     margin-left: 6px;
 }
 
-h3.missionCard-title.completed,
-p.missionCard-subtitle.completed {
-    text-decoration: line-through;
-    color: #95a5a6;
-    /* Color gris para indicar que está completado */
-}
-
 h3.missionCard-title {
     font-size: 1.2em;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--color-text-primary);
     margin: 0;
 }
 
 p.missionCard-subtitle {
     font-size: 0.9em;
-    color: #7f8c8d;
+    color: var(--color-text-secondary);
     margin: 0;
+}
+
+h3.missionCard-title.completed,
+p.missionCard-subtitle.completed {
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+}
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media(min-width:768px) {

@@ -1,0 +1,110 @@
+# .claudeignore — Define qué archivos ignora Claude Code al leer el contexto del proyecto.
+# Sintaxis idéntica a .gitignore.
+# Objetivo: reducir ruido de contexto y evitar que Claude procese binarios,
+# dependencias o archivos que no aportan información sobre la lógica del proyecto.
+
+# =============================================================================
+# DEPENDENCIAS — volumen masivo, sin valor de contexto
+# =============================================================================
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+
+# =============================================================================
+# BUILD — artefactos generados, no fuente de verdad
+# =============================================================================
+build/
+dist/
+out/
+coverage/
+
+# =============================================================================
+# ASSETS BINARIOS Y MULTIMEDIA — no legibles como texto
+# =============================================================================
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.ico
+*.bmp
+*.tiff
+*.mp4
+*.mp3
+*.webm
+*.ogg
+*.wav
+*.pdf
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# =============================================================================
+# FUENTES — binarios, sin valor de contexto de código
+# =============================================================================
+*.woff
+*.woff2
+*.ttf
+*.eot
+*.otf
+
+# =============================================================================
+# LOCK FILES — relevantes para reproducibilidad pero no para entender lógica
+# =============================================================================
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# =============================================================================
+# LOGS Y ARCHIVOS TEMPORALES
+# =============================================================================
+*.log
+logs/
+wget-log
+wget-log.*
+*.tmp
+*.temp
+*.bak
+*.orig
+.cache/
+.eslintcache
+.stylelintcache
+
+# =============================================================================
+# SISTEMA OPERATIVO
+# =============================================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+._*
+.Spotlight-V100
+.Trashes
+
+# =============================================================================
+# IDEs — metadata de herramientas, no del proyecto
+# =============================================================================
+.idea/
+*.iml
+*.swp
+*.swo
+
+# =============================================================================
+# CONFIGURACIÓN LOCAL DE AGENTES AI
+# Contiene preferencias locales del desarrollador, no arquitectura del sistema
+# =============================================================================
+.claude/settings.local.json
+.claude/agents/
+.agent/
+
+# =============================================================================
+# ARCHIVOS DE DESARROLLO SUELTOS
+# =============================================================================
+src/todo.txt
+
+# NOTA: docs/ está deliberadamente excluida de este ignore.
+# Contiene documentación relevante del proyecto (UX_AUDIT_REPORT.md,
+# IMPLEMENTATION_PLAN.md) que Claude debe leer para entender el contexto.

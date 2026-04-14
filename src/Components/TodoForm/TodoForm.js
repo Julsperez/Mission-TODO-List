@@ -6,7 +6,7 @@ import "./TodoForm.css";
 
 function TodoForm({ onSubmit, editView, task, onCancel }) {
   const { setOpenTaskModal, openTaskModal } = React.useContext(TodoContext);
-  const generateRandomId = () => Math.floor(Math.random() * 1000000);
+  const generateRandomId = () => crypto.randomUUID();
   const [formData, setFormData] = useState({
     missionId: generateRandomId(),
     title: "",

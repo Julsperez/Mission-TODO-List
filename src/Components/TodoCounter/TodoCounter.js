@@ -31,7 +31,17 @@ function TodoCounter() {
           </>
         )
       }
-      
+      {totalTodos > 0 && (
+        <div
+          className="progressBarContainer"
+          aria-label={`Progreso: ${completedTodos} de ${totalTodos}`}
+        >
+          <div
+            className="progressBar"
+            style={{ width: `${(completedTodos / totalTodos) * 100}%` }}
+          />
+        </div>
+      )}
     </>
 
   );

@@ -19,10 +19,12 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
     setIsShowPomodoro
   } = React.useContext(TodoContext);
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isConfirmingDelete, setIsConfirmingDelete] = React.useState(false);
   const menuRef = React.useRef(null);
 
   const toggleIsOpen = (event) => {
     event.stopPropagation();
+    if (isOpen) setIsConfirmingDelete(false);
     setIsOpen(prev => !prev);
   };
 
@@ -30,6 +32,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
     event.stopPropagation();
     onSelectedOption(option);
     setIsOpen(false);
+    setIsConfirmingDelete(false);
   };
 
   const handleEdit = (event) => {
@@ -44,12 +47,14 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsOpen(false);
+        setIsConfirmingDelete(false);
       }
     };
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setIsOpen(false);
+        setIsConfirmingDelete(false);
       }
     };
 
@@ -126,8 +131,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                 </span>
               </>
             ) : (
-              <>
-              </>)
+              <></>)
           }
 
           {
@@ -154,15 +158,35 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
             )
           }
 
-          <span
-            onClick={(event) => { handleOption(event, "delete"); }}
-            className="overflowMenu-option delete"
-            role="menuitem"
-            tabIndex={0}
-          >
-            Borrar
-            <HiOutlineTrash className="option-icon" />
-          </span>
+          {isConfirmingDelete ? (
+            <div className="overflowMenu-confirmDelete" onClick={(e) => e.stopPropagation()}>
+              <span className="confirmDelete-text">¿Eliminar esta misión?</span>
+              <div className="confirmDelete-actions">
+                <button
+                  className="confirmDelete-btn yes"
+                  onClick={(event) => { handleOption(event, "delete"); }}
+                >
+                  Sí, borrar
+                </button>
+                <button
+                  className="confirmDelete-btn no"
+                  onClick={(event) => { event.stopPropagation(); setIsConfirmingDelete(false); }}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          ) : (
+            <span
+              onClick={(event) => { event.stopPropagation(); setIsConfirmingDelete(true); }}
+              className="overflowMenu-option delete"
+              role="menuitem"
+              tabIndex={0}
+            >
+              Borrar
+              <HiOutlineTrash className="option-icon" />
+            </span>
+          )}
         </div>
       )}
     </div>

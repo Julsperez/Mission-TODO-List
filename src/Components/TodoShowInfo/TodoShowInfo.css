@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  color: #2c3e50;
+  color: var(--color-text-primary);
   margin-top: 1rem;
 }
 
@@ -53,12 +53,12 @@
 	margin: 0;
 	font-size: 1.3rem;
 	font-weight: 700;
-	color: #2c3e50;
+	color: var(--color-text-primary);
 }
 
 .taskSubtitle {
 	margin: 0;
-	color: #7f8c8d;
+	color: var(--color-text-secondary);
 	font-size: 0.95rem;
 }
 
@@ -71,13 +71,13 @@
 .sectionHeading {
 	margin: 0 0 0.5rem 0;
 	font-size: 0.95rem;
-	color: #007fff;
+	color: var(--color-star-glow);
 	font-weight: 700;
 }
 
 .taskDescription p {
 	margin: 0;
-	color: #34495e;
+	color: var(--color-text-secondary);
 	line-height: 1.4;
 }
 
@@ -99,20 +99,20 @@
 	align-items: center;
 	gap: 0.75rem;
 	padding: 0.5rem;
-	background: #f8f9fa;
+	background: rgba(255, 255, 255, 0.04);
 	border-radius: 6px;
-	border-left: 3px solid #007fff;
+	border-left: 3px solid var(--color-star-glow);
 }
 
 .objectiveRow input[type="checkbox"] {
 	width: 18px;
 	height: 18px;
-	accent-color: #007fff;
+	accent-color: var(--color-star-glow);
 }
 
 .objectiveText {
 	flex: 1;
-	color: #2c3e50;
+	color: var(--color-text-primary);
 }
 
 .objectiveCompleted {
@@ -122,7 +122,7 @@
 
 .noObjectives {
 	margin: 0;
-	color: #95a5a6;
+	color: var(--color-text-muted);
 }
 
 /* Footer actions */
@@ -143,14 +143,18 @@
 }
 
 .taskBtn.primary {
-	background: #007fff;
-	color: #ffffff;
+	background: var(--color-star-glow);
+	color: var(--color-void);
 }
 
 .taskBtn.secondary {
-	background: #ecf0f1;
-	color: #2c3e50;
-	border: 1px solid #d0d7de;
+	background: rgba(255, 255, 255, 0.08);
+	color: var(--color-text-primary);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.taskBtn.secondary:hover {
+	background: rgba(255, 255, 255, 0.14);
 }
 
 .taskBtn.ghost {

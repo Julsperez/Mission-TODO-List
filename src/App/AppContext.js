@@ -73,9 +73,9 @@ function AppContext() {
               <CreateTodoButton setOpenTaskModal={setOpenTaskModal} />
               <TodoSearch />
               {openTaskModal && (
-                <Modal>
+                <Modal onClose={handleCloseModal}>
                   <div className="modalButton">
-                    <button onClick={handleCloseModal} className="closeButtonModal">
+                    <button onClick={handleCloseModal} className="closeButtonModal" aria-label="Cerrar">
                       <HiOutlineXCircle />
                     </button>
                   </div>
@@ -83,7 +83,10 @@ function AppContext() {
                     <TodoShowInfo
                       task={task}
                       onClose={handleCloseModal}
-                      onEdit={() => setIsEditTask(true)}
+                      onEdit={() => {
+                        setIsEditTask(true);
+                        setIsShowTaskInfo(false);
+                      }}
                     />
                   ) : isShowPomodoro ? (
                     <PomodoroTimer task={task} />

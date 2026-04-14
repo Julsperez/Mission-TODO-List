@@ -1,26 +1,165 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# =============================================================================
+# DEPENDENCIAS
+# =============================================================================
 /node_modules
 /.pnp
 .pnp.js
+.yarn/install-state.gz
 
-# testing
+# =============================================================================
+# TESTING
+# =============================================================================
 /coverage
 
-# production
+# =============================================================================
+# BUILD Y DISTRIBUCIÓN
+# =============================================================================
 /build
+/dist
+/out
 
-# misc
-.DS_Store
+# =============================================================================
+# VARIABLES DE ENTORNO Y SECRETOS
+# Nunca subir claves, tokens ni configuración sensible
+# =============================================================================
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env.staging
+.env.staging.local
+.env.*.local
+*.pem
+*.key
+*.cert
+*.p12
+secrets/
+.secrets
 
+# =============================================================================
+# LOGS
+# =============================================================================
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+logs/
+wget-log
+wget-log.*
 
-# vscode
-.vscode
+# =============================================================================
+# SISTEMA OPERATIVO — Windows
+# =============================================================================
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+[Dd]esktop.ini
+
+# =============================================================================
+# SISTEMA OPERATIVO — macOS
+# =============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# =============================================================================
+# SISTEMA OPERATIVO — Linux
+# =============================================================================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# IDEs — Visual Studio Code
+# =============================================================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# =============================================================================
+# IDEs — JetBrains (WebStorm, IntelliJ, etc.)
+# =============================================================================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# =============================================================================
+# IDEs — Vim / Neovim
+# =============================================================================
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+
+# =============================================================================
+# IDEs — Emacs
+# =============================================================================
+\#*\#
+.\#*
+*.elc
+auto-save-list
+tramp
+
+# =============================================================================
+# IDEs — Sublime Text
+# =============================================================================
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# =============================================================================
+# HERRAMIENTAS AI (configuración local de agentes — no es código del proyecto)
+# =============================================================================
+.claude/settings.local.json
+.agent/
+
+# =============================================================================
+# ARCHIVOS TEMPORALES Y DE DESARROLLO
+# =============================================================================
+src/todo.txt
+*.tmp
+*.temp
+*.bak
+*.orig
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# =============================================================================
+# RUNTIME Y HERRAMIENTAS
+# =============================================================================
+.node_repl_history
+.npm
+.yarn-integrity
+.pnpm-store/

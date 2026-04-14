@@ -15,6 +15,7 @@ function TodoItem({ todo, onItemUpdated }) {
     let updatedTodo = { ...todo };
     if (option === "complete" && !updatedTodo.isCompleted) {
       updatedTodo.isCompleted = true;
+      updatedTodo.status = "completed";
     }
     if (option === "active") {
       updatedTodo.isCompleted = false;
@@ -45,7 +46,7 @@ function TodoItem({ todo, onItemUpdated }) {
           ${todo.typeofMission === "side" ? "side" : "main"}
           ${todo.status === "archived" && "archived"}
         `}>
-          {todo.typeofMission}
+          {todo.typeofMission === "main" ? "Principal" : "Secundaria"}
         </span>
         <OverflowMenu 
           todoItem={todo}
