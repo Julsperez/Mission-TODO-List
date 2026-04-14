@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Mission-TODO-List/static/css/main.ee9c8216.css",
-    "main.js": "/Mission-TODO-List/static/js/main.08d37520.js",
+    "main.css": "/Mission-TODO-List/static/css/main.1c8ee875.css",
+    "main.js": "/Mission-TODO-List/static/js/main.64e6f249.js",
     "static/media/background.webp": "/Mission-TODO-List/static/media/background.f5525a356a9851aaca0c.webp",
     "index.html": "/Mission-TODO-List/index.html",
-    "main.ee9c8216.css.map": "/Mission-TODO-List/static/css/main.ee9c8216.css.map",
-    "main.08d37520.js.map": "/Mission-TODO-List/static/js/main.08d37520.js.map"
+    "main.1c8ee875.css.map": "/Mission-TODO-List/static/css/main.1c8ee875.css.map",
+    "main.64e6f249.js.map": "/Mission-TODO-List/static/js/main.64e6f249.js.map"
   },
   "entrypoints": [
-    "static/css/main.ee9c8216.css",
-    "static/js/main.08d37520.js"
+    "static/css/main.1c8ee875.css",
+    "static/js/main.64e6f249.js"
   ]
 }
