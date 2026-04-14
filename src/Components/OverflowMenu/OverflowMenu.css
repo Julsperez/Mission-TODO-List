@@ -1,5 +1,6 @@
 div.overflowMenu-container {
     position: relative;
+    z-index: 50;
 }
 
 button.overflowMenu-button {
@@ -37,7 +38,7 @@ div.overflowMenu-menu {
     right: 0;
     border: 1px solid rgba(0, 212, 255, 0.2);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    z-index: 10;
+    z-index: 50;
 }
 
 span.overflowMenu-option {

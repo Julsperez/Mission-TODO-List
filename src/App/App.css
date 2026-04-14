@@ -5,23 +5,19 @@ div#app-container {
     position: relative;
 }
 
-h2.appLoadingMessage {
+.appLoadingMessage {
     color: white;
     font-size: xxx-large;
     text-align: center;
     margin: 0 auto;
 }
 
-div.appContainerHeader {
+.appContainerHeader {
     color: white;
     display: flex;
     flex-flow: column;
 }
 
-div.appHeaderActions {
-    display: flex;
-    justify-content: space-between;
-}
 
 div.modalButton {
     display: flex;
@@ -29,13 +25,13 @@ div.modalButton {
     position: relative;
 }
 
-button.closeButtonModal {
+.closeButtonModal {
     border: none;
     width: 30px;
     height: 30px;
     padding: 0;
     font-size: xx-large;
-    color: #e05555;
+    color: var(--color-danger);
     background: none;
     display: flex;
     position: absolute;

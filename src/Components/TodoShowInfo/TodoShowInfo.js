@@ -4,28 +4,18 @@ import { TodoContext } from "../../TodoContext";
 import "./TodoShowInfo.css";
 
 function TodoShowInfo({ task, onClose, onEdit }) {
-  const { todos, setTodos, setTask } = useContext(TodoContext);
+  const { updateTodo, setTask } = useContext(TodoContext);
 
   if (!task) return null;
 
   const handleToggleObjective = (objectiveId) => {
-    // Encontrar la tarea y actualizar sus objetivos
-    const updatedObjectives = task.objectives.map(obj => {
-      if (obj.objectiveId === objectiveId) {
-        return { ...obj, isCompleted: !obj.isCompleted };
-      }
-      return obj;
-    });
-
-    const updatedTask = { ...task, objectives: updatedObjectives };
-
-    // Actualizar el estado global de todos
-    const updatedTodos = todos.map(todo =>
-      todo.missionId === task.missionId ? updatedTask : todo
-    );
-
-    setTodos(updatedTodos);
-    // Actualizar la tarea actual para reflejar cambios inmediatamente en la UI
+    const updatedTask = {
+      ...task,
+      objectives: task.objectives.map(obj =>
+        obj.objectiveId === objectiveId ? { ...obj, isCompleted: !obj.isCompleted } : obj
+      )
+    };
+    updateTodo(updatedTask);
     setTask(updatedTask);
   };
 
@@ -43,7 +33,7 @@ function TodoShowInfo({ task, onClose, onEdit }) {
   return (
     <div className="taskInfoContainer">
       <div>
-        <h2 className={`taskTitle ${task.isCompleted ? "completed" : ""}`}>{task.title}</h2>
+        <h2 id="modal-title" className={`taskTitle ${task.isCompleted ? "completed" : ""}`}>{task.title}</h2>
         {task.subtitle && <p className={`taskSubtitle ${task.isCompleted ? "completed" : ""}`}>{task.subtitle}</p>}
       </div>
 

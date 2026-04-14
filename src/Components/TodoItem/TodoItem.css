@@ -1,4 +1,4 @@
-div.missionCard {
+.missionCard {
     background: rgba(10, 10, 46, 0.78);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
@@ -17,25 +17,25 @@ div.missionCard {
     margin: 1rem auto;
 }
 
-div.missionCard:hover {
+.missionCard:hover {
     border-color: rgba(0, 212, 255, 0.45);
     box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.4);
     transform: translateY(-2px);
 }
 
-div.missionCard.archived {
+.missionCard.archived {
     background: rgba(20, 20, 55, 0.5);
     border-color: rgba(255, 255, 255, 0.08);
     color: var(--color-text-muted);
 }
 
-div.missionCard-header {
+.missionCard-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
 }
 
-span.missionLabel {
+.missionLabel {
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 0.75em;
@@ -46,13 +46,13 @@ span.missionLabel {
 span.main {
     background: rgba(59, 130, 246, 0.2);
     border: 1px solid rgba(59, 130, 246, 0.5);
-    color: #93c5fd;
+    color: var(--color-mission-main-text);
 }
 
 span.side {
     background: rgba(16, 185, 129, 0.2);
     border: 1px solid rgba(16, 185, 129, 0.5);
-    color: #6ee7b7;
+    color: var(--color-mission-side-text);
 }
 
 span.archived {
@@ -61,26 +61,22 @@ span.archived {
     color: var(--color-text-muted);
 }
 
-span.archived::after {
-    content: "Archivado";
-    margin-left: 6px;
-}
 
-h3.missionCard-title {
+.missionCard-title {
     font-size: 1.2em;
     font-weight: 600;
     color: var(--color-text-primary);
     margin: 0;
 }
 
-p.missionCard-subtitle {
+.missionCard-subtitle {
     font-size: 0.9em;
     color: var(--color-text-secondary);
     margin: 0;
 }
 
-h3.missionCard-title.completed,
-p.missionCard-subtitle.completed {
+.missionCard-title.completed,
+.missionCard-subtitle.completed {
     text-decoration: line-through;
     color: var(--color-text-muted);
 }
@@ -91,7 +87,7 @@ p.missionCard-subtitle.completed {
 }
 
 @media(min-width:768px) {
-    div.missionCard {
+    .missionCard {
         max-width: 240px;
     }
 }

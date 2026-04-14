@@ -7,8 +7,6 @@ import "./TodoList.css";
 function TodoList() {
   const { setTodos, searchedTodos, todos } = React.useContext(TodoContext);
   const [pillIndex, setPillIndex] = React.useState(0);
-  const [filterTodos, setFilterTodos] = React.useState(searchedTodos);
-  const [dividerText, setDividerText] = React.useState("Todas las misiones");
 
   const headerRef = useRef(null);
   const [isPinned, setIsPinned] = React.useState(false);
@@ -33,24 +31,16 @@ function TodoList() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    handleSelectedPill(pillIndex);
-  }, [searchedTodos]);
+  const filterTodos = React.useMemo(() => {
+    if (pillIndex === 0) return searchedTodos;
+    if (pillIndex === 1) return searchedTodos.filter(t => t.isCompleted && t.status !== "archived");
+    return searchedTodos.filter(t => t.status === "archived");
+  }, [searchedTodos, pillIndex]);
 
-  const handleSelectedPill = (pillIndex) => {
-    if (pillIndex === 0) {
-      setFilterTodos(searchedTodos);
-      setDividerText("Todas las misiones");
-    } else if (pillIndex === 1) {
-      const completed = searchedTodos.filter(todo => todo.isCompleted && todo.status !== "archived");
-      setFilterTodos(completed);
-      setDividerText("Misiones completadas");
-    } else if (pillIndex === 2) {
-      const archived = searchedTodos.filter(todo => todo.status === "archived");
-      setFilterTodos(archived);
-      setDividerText("Misiones archivadas");
-    }
-    setPillIndex(pillIndex);
+  const dividerText = pillIndex === 0 ? "Todas las misiones" : pillIndex === 1 ? "Misiones completadas" : "Misiones archivadas";
+
+  const handleSelectedPill = (index) => {
+    setPillIndex(index);
   };
 
   const updateTodos = (updatedTodo) => {
@@ -92,12 +82,11 @@ function TodoList() {
         ) : (
           <div className="todoListPanelContent">
             {filterTodos.map(todo => (
-              <React.Fragment key={todo.missionId}>
-                <TodoItem
-                  todo={todo}
-                  onItemUpdated={updateTodos}
-                />
-              </React.Fragment>
+              <TodoItem
+                key={todo.missionId}
+                todo={todo}
+                onItemUpdated={updateTodos}
+              />
             ))}
           </div>
         )}

@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-div.modalContainer {
+.modalContainer {
   position: relative;
   background: rgba(10, 10, 46, 0.92);
   backdrop-filter: blur(16px) saturate(180%);
@@ -41,15 +41,15 @@ div.modalContainer {
 }
 
 @media (min-width: 768px) {
-  div.modalContainer {
+  .modalContainer {
     max-width: 600px;
   }
 }
 
 /* Scrollbar personalizado */
-div.modalContainer::-webkit-scrollbar { width: 5px; }
-div.modalContainer::-webkit-scrollbar-track { background: transparent; }
-div.modalContainer::-webkit-scrollbar-thumb {
+.modalContainer::-webkit-scrollbar { width: 5px; }
+.modalContainer::-webkit-scrollbar-track { background: transparent; }
+.modalContainer::-webkit-scrollbar-thumb {
   background: rgba(0, 212, 255, 0.3);
   border-radius: 3px;
 }

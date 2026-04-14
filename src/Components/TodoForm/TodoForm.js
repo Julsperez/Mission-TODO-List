@@ -5,10 +5,9 @@ import { TodoContext } from "../../TodoContext";
 import "./TodoForm.css";
 
 function TodoForm({ onSubmit, editView, task, onCancel }) {
-  const { setOpenTaskModal, openTaskModal } = React.useContext(TodoContext);
-  const generateRandomId = () => crypto.randomUUID();
-  const [formData, setFormData] = useState({
-    missionId: generateRandomId(),
+  const { openTaskModal } = React.useContext(TodoContext);
+  const [formData, setFormData] = useState(() => ({
+    missionId: crypto.randomUUID(),
     title: "",
     subtitle: "",
     description: "",
@@ -16,7 +15,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
     status: "in-progress",
     typeofMission: "main",
     objectives: []
-  });
+  }));
 
   const inputTituloRef = useRef(null);
   useEffect(() => {
@@ -40,7 +39,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
     if (editView && Object.keys(task).length !== 0) {
       setFormData({ ...task });
     }
-  }, [task]);
+  }, [task, editView]);
 
 
   const [newObjective, setNewObjective] = useState("");
@@ -58,7 +57,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
   const handleAddObjective = () => {
     if (newObjective.trim()) {
       const objective = {
-        objectiveId: formData.objectives.length + 1,
+        objectiveId: crypto.randomUUID(),
         missionId: formData.missionId,
         description: newObjective,
         isCompleted: false
@@ -114,7 +113,6 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
     e.preventDefault();
     if (formData.title.trim()) {
       if (onSubmit) onSubmit(formData, editView);
-      setOpenTaskModal(false);
     }
   };
 
@@ -124,7 +122,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
 
   return (
     <form className="todoFormContainer" onSubmit={handleSubmit}>
-      <h2 className="todoForm-title">
+      <h2 id="modal-title" className="todoForm-title">
         {editView ? "Editar Misión" : "Crear Nueva Misión"}
       </h2>
 
@@ -258,7 +256,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
               type="text"
               value={newObjective}
               onChange={(e) => setNewObjective(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleAddObjective()}
+              onKeyDown={(e) => e.key === "Enter" && handleAddObjective()}
               placeholder="Añade un objetivo (Enter para confirmar)"
               className="todoForm-input"
             />
@@ -273,7 +271,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
 
           <div className="todoForm-objectivesList">
             {formData.objectives.map((objective, index) => (
-              <div key={index} className="todoForm-objectiveItem">
+              <div key={objective.objectiveId} className="todoForm-objectiveItem">
                 <span className="objectiveIndex">{index + 1}.</span>
                 {editingIndex === index ? (
                   <input

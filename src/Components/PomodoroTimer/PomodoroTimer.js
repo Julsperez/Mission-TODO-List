@@ -6,32 +6,22 @@ import './PomodoroTimer.css';
 
 function PomodoroTimer({ task }) {
   const { isActive, toggleTimer, resetTimer, formatTime } = usePomodoro();
-  const { todos, setTodos, setTask } = useContext(TodoContext);
+  const { updateTodo, setTask } = useContext(TodoContext);
 
   const handleToggleObjective = (objectiveId) => {
-    // Encontrar la tarea y actualizar sus objetivos
-    const updatedObjectives = task.objectives.map(obj => {
-      if (obj.objectiveId === objectiveId) {
-        return { ...obj, isCompleted: !obj.isCompleted };
-      }
-      return obj;
-    });
-
-    const updatedTask = { ...task, objectives: updatedObjectives };
-
-    // Actualizar el estado global de todos
-    const updatedTodos = todos.map(todo =>
-      todo.missionId === task.missionId ? updatedTask : todo
-    );
-
-    setTodos(updatedTodos);
-    // Actualizar la tarea actual para reflejar cambios inmediatamente en la UI
+    const updatedTask = {
+      ...task,
+      objectives: task.objectives.map(obj =>
+        obj.objectiveId === objectiveId ? { ...obj, isCompleted: !obj.isCompleted } : obj
+      )
+    };
+    updateTodo(updatedTask);
     setTask(updatedTask);
   };
 
   return (
     <div className="pomodoro-container">
-      <h2 className="pomodoro-title">{task.title}</h2>
+      <h2 id="modal-title" className="pomodoro-title">{task.title}</h2>
       <p className="pomodoro-description">
         <span>{!!task.subtitle ? `${task.subtitle}` : ""}</span>
         <span>{!!task.description ? `${task.description}` : ""}</span>

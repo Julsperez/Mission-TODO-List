@@ -5,12 +5,6 @@ const TodoContext = React.createContext();
 
 function TodoProvider({ children }) {
 
-	const matchByTitle = (todos, searchValue) => {
-		return todos.filter(todo =>
-			todo.title.toLowerCase().includes(searchValue.toLowerCase())
-		);
-	};
-
 	// Custom hook para manejar el localStorage
 	const {
 		item: todos,
@@ -29,8 +23,19 @@ function TodoProvider({ children }) {
 
 	// Estados derivados, son variables calculadas a partir de otros estados
 	const totalTodos = todos.length;
-	const completedTodos = todos.filter(todo => !!todo.isCompleted).length;
-	const searchedTodos = matchByTitle(todos, searchValue);
+	const completedTodos = todos.filter(todo => !!todo.isCompleted && todo.status !== "archived").length;
+	const searchedTodos = React.useMemo(
+		() => todos.filter(todo =>
+			todo.title.toLowerCase().includes(searchValue.toLowerCase())
+		),
+		[todos, searchValue]
+	);
+
+	const updateTodo = React.useCallback((updatedTodo) => {
+		setTodos(prev => prev.map(t =>
+			t.missionId === updatedTodo.missionId ? updatedTodo : t
+		));
+	}, [setTodos]);
 
 	return (
 		<TodoContext.Provider value={{
@@ -41,6 +46,7 @@ function TodoProvider({ children }) {
 			searchedTodos,
 			todos,
 			setTodos,
+			updateTodo,
 			searchValue,
 			setSearchValue,
 			openTaskModal,

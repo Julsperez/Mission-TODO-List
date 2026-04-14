@@ -15,20 +15,22 @@ function usePomodoro(initialMinutes = 25) {
 	};
 
 	React.useEffect(() => {
-		if (isActive && timeLeft > 0) {
-			timerRef.current = setInterval(() => {
-				setTimeLeft((prevTime) => prevTime - 1);
-			}, 1000);
-		} else if (timeLeft === 0) {
-			setIsActive(false);
+		if (!isActive) {
 			clearInterval(timerRef.current);
-			// Opcional: Notificar finalización o sonar una alarma
-		} else {
-			clearInterval(timerRef.current);
+			return;
 		}
-
+		timerRef.current = setInterval(() => {
+			setTimeLeft(prev => {
+				if (prev <= 1) {
+					clearInterval(timerRef.current);
+					setIsActive(false);
+					return 0;
+				}
+				return prev - 1;
+			});
+		}, 1000);
 		return () => clearInterval(timerRef.current);
-	}, [isActive, timeLeft]);
+	}, [isActive]);
 
 	const formatTime = () => {
 		const minutes = Math.floor(timeLeft / 60);
