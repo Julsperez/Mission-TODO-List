@@ -58,7 +58,12 @@ function AppContext() {
       {loading ?
         <h2 className='appLoadingMessage'>Cargando datos de misiones...</h2> :
         error ?
-          <h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> :
+          (
+            <>
+              <h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> 
+              {/* <button onClick={() => alert(localStorage.getItem('defaultTodosV1'))}>Debug button</button> */}
+            </>
+          ):
           (
             <>
 

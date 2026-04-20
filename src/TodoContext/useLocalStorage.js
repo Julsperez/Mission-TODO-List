@@ -7,24 +7,26 @@ const useLocalStorage = (keyItem, initialItemValue) => {
   const [error, setError] = React.useState(false);
   
   React.useEffect(() => {
-    setTimeout(() => {
-      try {
-        // validacion del localStorage
-        const localStorageItem = localStorage.getItem(keyItem);
-        let parsedItem;
-        if (!localStorageItem) {
-          localStorage.setItem(keyItem, JSON.stringify(initialItemValue));
-          parsedItem = initialItemValue;
-        } else {
-          parsedItem = JSON.parse(localStorageItem);
-        }
-        setItem(parsedItem);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
+    try {
+      const localStorageItem = localStorage.getItem(keyItem);
+      let parsedItem;
+      if (!localStorageItem) {
+        localStorage.setItem(keyItem, JSON.stringify(initialItemValue));
+        parsedItem = initialItemValue;
+      } else {
+        parsedItem = JSON.parse(localStorageItem);
+      }
+      setItem(parsedItem);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      if (error instanceof SyntaxError) {
+        localStorage.setItem(keyItem, JSON.stringify(initialItemValue));
+        setItem(initialItemValue);
+      } else {
         setError(true);
       }
-    }, 2000); // Simular tiempo de carga
+    }
   }, []);
 
 
