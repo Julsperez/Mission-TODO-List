@@ -6,18 +6,7 @@ import './PomodoroTimer.css';
 
 function PomodoroTimer({ task }) {
   const { isActive, toggleTimer, resetTimer, formatTime } = usePomodoro();
-  const { updateTodo, setTask } = useContext(TodoContext);
-
-  const handleToggleObjective = (objectiveId) => {
-    const updatedTask = {
-      ...task,
-      objectives: task.objectives.map(obj =>
-        obj.objectiveId === objectiveId ? { ...obj, isCompleted: !obj.isCompleted } : obj
-      )
-    };
-    updateTodo(updatedTask);
-    setTask(updatedTask);
-  };
+  const { toggleObjective } = useContext(TodoContext);
 
   return (
     <div className="pomodoro-container">
@@ -58,7 +47,7 @@ function PomodoroTimer({ task }) {
                   <input
                     type="checkbox"
                     checked={!!obj.isCompleted}
-                    onChange={() => handleToggleObjective(obj.objectiveId)}
+                    onChange={() => toggleObjective(task.missionId, obj.objectiveId)}
                     className="objective-checkbox"
                   />
                   <span className="objective-text">{obj.description}</span>

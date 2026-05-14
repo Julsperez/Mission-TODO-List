@@ -44,6 +44,21 @@ function TodoProvider({ children }) {
 		setTodos(prev => prev.filter(t => t.missionId !== missionId));
 	}, [setTodos]);
 
+	const toggleObjective = React.useCallback((missionId, objectiveId) => {
+		const todo = todos.find(t => t.missionId === missionId);
+		if (!todo) return;
+		const updatedTask = {
+			...todo,
+			objectives: todo.objectives.map(obj =>
+				obj.objectiveId === objectiveId
+					? { ...obj, isCompleted: !obj.isCompleted }
+					: obj
+			)
+		};
+		updateTodo(updatedTask);
+		setTask(updatedTask);
+	}, [todos, updateTodo, setTask]);
+
 	return (
 		<TodoContext.Provider value={{
 			completedTodos,
@@ -55,6 +70,7 @@ function TodoProvider({ children }) {
 			setTodos,
 			updateTodo,
 			deleteTodo,
+			toggleObjective,
 			searchValue,
 			setSearchValue,
 			openTaskModal,

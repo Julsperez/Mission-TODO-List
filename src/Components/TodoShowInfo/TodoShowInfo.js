@@ -4,20 +4,9 @@ import { TodoContext } from "../../TodoContext";
 import "./TodoShowInfo.css";
 
 function TodoShowInfo({ task, onClose, onEdit }) {
-  const { updateTodo, setTask } = useContext(TodoContext);
+  const { toggleObjective } = useContext(TodoContext);
 
   if (!task) return null;
-
-  const handleToggleObjective = (objectiveId) => {
-    const updatedTask = {
-      ...task,
-      objectives: task.objectives.map(obj =>
-        obj.objectiveId === objectiveId ? { ...obj, isCompleted: !obj.isCompleted } : obj
-      )
-    };
-    updateTodo(updatedTask);
-    setTask(updatedTask);
-  };
 
   const statusClass = (status) => {
     switch (status) {
@@ -67,7 +56,7 @@ function TodoShowInfo({ task, onClose, onEdit }) {
                 <input
                   type="checkbox"
                   checked={!!obj.isCompleted}
-                  onChange={() => handleToggleObjective(obj.objectiveId)}
+                  onChange={() => toggleObjective(task.missionId, obj.objectiveId)}
                   className="objectiveCheckbox"
                 />
                 <span className="objectiveText">{obj.description}</span>

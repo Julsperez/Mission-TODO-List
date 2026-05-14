@@ -30,9 +30,12 @@ const useLocalStorage = (keyItem, initialItemValue) => {
   }, []);
 
 
-  const updateItem = (newItem) => {
-    localStorage.setItem(keyItem, JSON.stringify(newItem));
-    setItem(newItem);
+  const updateItem = (newItemOrUpdater) => {
+    setItem(prev => {
+      const value = typeof newItemOrUpdater === 'function' ? newItemOrUpdater(prev) : newItemOrUpdater;
+      localStorage.setItem(keyItem, JSON.stringify(value));
+      return value;
+    });
   };
 
   // const removeItem = () => {
