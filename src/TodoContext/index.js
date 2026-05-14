@@ -11,7 +11,7 @@ function TodoProvider({ children }) {
 		updateItem: setTodos,
 		loading,
 		error
-	} = useLocalStorage('defaultTodosV1', []); // guardar defaultTodosV1 en archivo .env como TODOS_KEY
+	} = useLocalStorage(process.env.REACT_APP_TODOS_KEY, []);
 
 	// Componente padre debe manejar los estados de los componentes hijos
 	const [searchValue, setSearchValue] = React.useState('');
