@@ -18,8 +18,7 @@ function AppContext() {
     error,
     loading,
     searchedTodos,
-    todos,
-    setTodos,
+    updateTodo,
     openTaskModal,
     setOpenTaskModal,
     isEditTask,
@@ -40,16 +39,8 @@ function AppContext() {
     setTask({});
   };
 
-  const handleSubmitTodo = (newTodo, isEditFlag) => {
-    let updatedTodos;
-    if (isEditFlag) {
-      updatedTodos = todos.map(todo =>
-        todo.missionId === newTodo.missionId ? newTodo : todo
-      );
-    } else {
-      updatedTodos = [newTodo, ...todos];
-    }
-    setTodos(updatedTodos);
+  const handleSubmitTodo = (newTodo) => {
+    updateTodo(newTodo);
     handleCloseModal();
   };
 

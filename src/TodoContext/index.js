@@ -32,9 +32,16 @@ function TodoProvider({ children }) {
 	);
 
 	const updateTodo = React.useCallback((updatedTodo) => {
-		setTodos(prev => prev.map(t =>
-			t.missionId === updatedTodo.missionId ? updatedTodo : t
-		));
+		setTodos(prev => {
+			const exists = prev.some(t => t.missionId === updatedTodo.missionId);
+			return exists
+				? prev.map(t => t.missionId === updatedTodo.missionId ? updatedTodo : t)
+				: [updatedTodo, ...prev];
+		});
+	}, [setTodos]);
+
+	const deleteTodo = React.useCallback((missionId) => {
+		setTodos(prev => prev.filter(t => t.missionId !== missionId));
 	}, [setTodos]);
 
 	return (
@@ -47,6 +54,7 @@ function TodoProvider({ children }) {
 			todos,
 			setTodos,
 			updateTodo,
+			deleteTodo,
 			searchValue,
 			setSearchValue,
 			openTaskModal,

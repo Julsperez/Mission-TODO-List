@@ -5,7 +5,7 @@ import { ListDivider, TodoItem } from "../";
 import "./TodoList.css";
 
 function TodoList() {
-  const { setTodos, searchedTodos, todos } = React.useContext(TodoContext);
+  const { searchedTodos, updateTodo, deleteTodo } = React.useContext(TodoContext);
   const [pillIndex, setPillIndex] = React.useState(0);
 
   const headerRef = useRef(null);
@@ -43,17 +43,13 @@ function TodoList() {
     setPillIndex(index);
   };
 
-  const updateTodos = (updatedTodo) => {
-    let newTodos;
-    if (updatedTodo.status === "deleted") {
-      newTodos = todos.filter(todo => todo.missionId !== updatedTodo.missionId);
+  const handleItemUpdated = (updatedTodo) => {
+    if (updatedTodo.status === 'deleted') {
+      deleteTodo(updatedTodo.missionId);
     } else {
-      newTodos = todos.map(todo =>
-        todo.missionId === updatedTodo.missionId ? updatedTodo : todo
-      );
+      updateTodo(updatedTodo);
     }
-    setTodos(newTodos);
-  }
+  };
 
   return (
     <div className="todoListContainer">
@@ -85,7 +81,7 @@ function TodoList() {
               <TodoItem
                 key={todo.missionId}
                 todo={todo}
-                onItemUpdated={updateTodos}
+                onItemUpdated={handleItemUpdated}
               />
             ))}
           </div>
