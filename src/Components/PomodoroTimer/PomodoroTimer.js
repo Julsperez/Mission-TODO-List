@@ -5,8 +5,21 @@ import { HiOutlinePlay, HiOutlinePause, HiOutlineRefresh } from 'react-icons/hi'
 import './PomodoroTimer.css';
 
 function PomodoroTimer({ task }) {
-  const { isActive, toggleTimer, resetTimer, formatTime } = usePomodoro();
   const { toggleObjective } = useContext(TodoContext);
+
+  React.useEffect(() => {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }, []);
+
+  const handleComplete = React.useCallback(() => {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification('¡Misión completada!', { body: task.title });
+    }
+  }, [task.title]);
+
+  const { isActive, toggleTimer, resetTimer, formatTime } = usePomodoro(25, handleComplete);
 
   return (
     <div className="pomodoro-container">

@@ -1,9 +1,11 @@
 import React from 'react';
 
-function usePomodoro(initialMinutes = 25) {
+function usePomodoro(initialMinutes = 25, onComplete) {
 	const [timeLeft, setTimeLeft] = React.useState(initialMinutes * 60);
 	const [isActive, setIsActive] = React.useState(false);
 	const timerRef = React.useRef(null);
+	const onCompleteRef = React.useRef(onComplete);
+	React.useEffect(() => { onCompleteRef.current = onComplete; }, [onComplete]);
 
 	const toggleTimer = () => {
 		setIsActive(!isActive);
@@ -24,6 +26,7 @@ function usePomodoro(initialMinutes = 25) {
 				if (prev <= 1) {
 					clearInterval(timerRef.current);
 					setIsActive(false);
+					onCompleteRef.current?.();
 					return 0;
 				}
 				return prev - 1;
