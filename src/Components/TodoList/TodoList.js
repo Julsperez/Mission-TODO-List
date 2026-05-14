@@ -56,12 +56,14 @@ function TodoList() {
       <div ref={headerRef} className={`todoListHeader ${isPinned ? 'is-pinned' : ''}`}>
         {
           [0, 1, 2].map(index => (
-            <span key={index}
+            <button key={index}
+              type="button"
               className={`headerPill ${pillIndex === index ? "active" : ""}`}
-              onClick={() => { handleSelectedPill(index); }}>
+              onClick={() => { handleSelectedPill(index); }}
+              aria-pressed={pillIndex === index}>
               {index === 0 ? "Todas" : index === 1 ? "Completadas" : "Archivadas"}
               {pillIndex === index && (<HiCheck className="check-icon" />)}
-            </span>
+            </button>
           ))
         }
       </div>

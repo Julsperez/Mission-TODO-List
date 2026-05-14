@@ -147,6 +147,7 @@ tramp
 # ARCHIVOS TEMPORALES Y DE DESARROLLO
 # =============================================================================
 src/todo.txt
+todo.txt
 *.tmp
 *.temp
 *.bak

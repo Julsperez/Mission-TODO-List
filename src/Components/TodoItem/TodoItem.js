@@ -13,6 +13,8 @@ function TodoItem({ todo, onItemUpdated }) {
 
   const today = new Date().toISOString().split('T')[0];
   const isOverdue = todo.dueDate && !todo.isCompleted && todo.dueDate < today;
+  const totalObjectives = (todo.objectives || []).length;
+  const completedObjectives = (todo.objectives || []).filter(o => o.isCompleted).length;
 
   const handleSelectedOption = (option) => {
     let updatedTodo = { ...todo };
@@ -62,13 +64,18 @@ function TodoItem({ todo, onItemUpdated }) {
             "completed"}`}>
           {todo.title}
         </h3>
-      <p 
+      <p
         className={
           `missionCard-subtitle ${
-            todo.isCompleted && 
+            todo.isCompleted &&
             "completed"}`}>
           {todo.subtitle}
         </p>
+      {totalObjectives > 0 && (
+        <p className="missionCard-objectives">
+          {completedObjectives} de {totalObjectives} objetivos
+        </p>
+      )}
     </div>
   );
 }
