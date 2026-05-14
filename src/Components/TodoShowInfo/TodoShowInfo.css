@@ -168,6 +168,11 @@
 	transform: translateY(1px);
 }
 
+.dueDateBadge {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
 /* Minor utilities */
 .taskInfoActions { display: flex; gap: 0.5rem; align-items: center; }
 

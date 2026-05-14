@@ -14,6 +14,7 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
     isCompleted: false,
     status: "in-progress",
     typeofMission: "main",
+    dueDate: "",
     objectives: []
   }));
 
@@ -158,6 +159,18 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
               value={formData.subtitle}
               onChange={handleInputChange}
               placeholder="Ej: Planificación General"
+              className="todoForm-input"
+            />
+          </div>
+
+          <div className="todoForm-group">
+            <label htmlFor="dueDate" className="todoForm-label">Fecha de vencimiento</label>
+            <input
+              type="date"
+              id="dueDate"
+              name="dueDate"
+              value={formData.dueDate}
+              onChange={handleInputChange}
               className="todoForm-input"
             />
           </div>

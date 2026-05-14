@@ -39,6 +39,13 @@ function TodoShowInfo({ task, onClose, onEdit }) {
             }
           </span>
         </div>
+        {task.dueDate && (
+          <span className="dueDateBadge">
+            Vence: {new Date(task.dueDate + 'T12:00:00').toLocaleDateString('es-ES', {
+              day: 'numeric', month: 'long', year: 'numeric'
+            })}
+          </span>
+        )}
       </div>
 
 

@@ -11,6 +11,9 @@ function TodoItem({ todo, onItemUpdated }) {
     setTask 
   } = React.useContext(TodoContext);
 
+  const today = new Date().toISOString().split('T')[0];
+  const isOverdue = todo.dueDate && !todo.isCompleted && todo.dueDate < today;
+
   const handleSelectedOption = (option) => {
     let updatedTodo = { ...todo };
     if (option === "complete" && !updatedTodo.isCompleted) {
@@ -51,10 +54,11 @@ function TodoItem({ todo, onItemUpdated }) {
           onSelectedOption={handleSelectedOption}
         />
       </div>
-      <h3 
+      {isOverdue && <span className="overdue-badge">Vencida</span>}
+      <h3
         className={
           `missionCard-title ${
-            todo.isCompleted && 
+            todo.isCompleted &&
             "completed"}`}>
           {todo.title}
         </h3>
