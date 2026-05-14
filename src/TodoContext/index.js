@@ -22,7 +22,7 @@ function TodoProvider({ children }) {
 	const [isShowPomodoro, setIsShowPomodoro] = React.useState(false);
 
 	// Estados derivados, son variables calculadas a partir de otros estados
-	const totalTodos = todos.length;
+	const totalTodos = todos.filter(todo => todo.status !== 'archived').length;
 	const completedTodos = todos.filter(todo => todo.status === 'completed').length;
 	const searchedTodos = React.useMemo(
 		() => todos.filter(todo =>
