@@ -19,7 +19,10 @@ function PomodoroTimer({ task }) {
     }
   }, [task.title]);
 
-  const { isActive, toggleTimer, resetTimer, formatTime } = usePomodoro(25, handleComplete);
+  const [selectedDuration, setSelectedDuration] = React.useState(25);
+  const { isActive, toggleTimer, resetTimer, formatTime } = usePomodoro(selectedDuration, handleComplete);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  React.useEffect(() => { resetTimer(); }, [selectedDuration]);
 
   return (
     <div className="pomodoro-container">
@@ -28,6 +31,17 @@ function PomodoroTimer({ task }) {
         <span>{!!task.subtitle ? `${task.subtitle}` : ""}</span>
         <span>{!!task.description ? `${task.description}` : ""}</span>
       </p>
+      <div className="pomodoro-duration-selector">
+        {[15, 25, 50].map(mins => (
+          <button
+            key={mins}
+            className={`duration-btn ${selectedDuration === mins ? 'active' : ''}`}
+            onClick={() => setSelectedDuration(mins)}
+          >
+            {mins} min
+          </button>
+        ))}
+      </div>
       <div className="pomodoro-timer">
         {formatTime()}
       </div>
