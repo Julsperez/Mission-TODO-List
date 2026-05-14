@@ -23,7 +23,7 @@ function TodoProvider({ children }) {
 
 	// Estados derivados, son variables calculadas a partir de otros estados
 	const totalTodos = todos.length;
-	const completedTodos = todos.filter(todo => !!todo.isCompleted && todo.status !== "archived").length;
+	const completedTodos = todos.filter(todo => todo.status === 'completed').length;
 	const searchedTodos = React.useMemo(
 		() => todos.filter(todo =>
 			todo.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -32,11 +32,15 @@ function TodoProvider({ children }) {
 	);
 
 	const updateTodo = React.useCallback((updatedTodo) => {
+		const normalized = {
+			...updatedTodo,
+			isCompleted: updatedTodo.status === 'completed'
+		};
 		setTodos(prev => {
-			const exists = prev.some(t => t.missionId === updatedTodo.missionId);
+			const exists = prev.some(t => t.missionId === normalized.missionId);
 			return exists
-				? prev.map(t => t.missionId === updatedTodo.missionId ? updatedTodo : t)
-				: [updatedTodo, ...prev];
+				? prev.map(t => t.missionId === normalized.missionId ? normalized : t)
+				: [normalized, ...prev];
 		});
 	}, [setTodos]);
 

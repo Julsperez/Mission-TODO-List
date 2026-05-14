@@ -14,11 +14,9 @@ function TodoItem({ todo, onItemUpdated }) {
   const handleSelectedOption = (option) => {
     let updatedTodo = { ...todo };
     if (option === "complete" && !updatedTodo.isCompleted) {
-      updatedTodo.isCompleted = true;
       updatedTodo.status = "completed";
     }
     if (option === "active") {
-      updatedTodo.isCompleted = false;
       updatedTodo.status = "in-progress";
     }
     if (option === "archive") {
