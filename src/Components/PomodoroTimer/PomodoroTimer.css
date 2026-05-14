@@ -59,12 +59,21 @@
 }
 
 .pomodoro-timer {
-    font-size: 5.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     margin: 20px 0;
-    color: #ff4d4d;
-    text-shadow: 0 0 20px rgba(255, 77, 77, 0.6);
+    color: #00e5ff;
+    text-shadow: 0 0 24px rgba(0, 229, 255, 0.7), 0 0 48px rgba(0, 229, 255, 0.3);
+    line-height: 1;
+}
+
+.pomodoro-timer-minutes,
+.pomodoro-timer-seconds {
+    font-size: 5.8rem;
+    display: block;
 }
 
 .pomodoro-controls {
@@ -96,6 +105,8 @@
 
 .pomodoro-btn.play {
     border-color: #97ca3f;
+    background: #97ca3f;
+    color: #1a1a2e;
 }
 
 .pomodoro-btn.pause {
@@ -145,13 +156,15 @@
 .objective-item {
     display: flex;
     align-items: flex-start;
-    padding: 8px;
+    padding: 12px 16px;
     border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: background 0.2s ease;
 }
 
 .objective-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.09);
 }
 
 .objective-label {
@@ -189,4 +202,14 @@
     text-align: center;
     font-style: italic;
     padding: 1rem;
+}
+
+.objectives-heading {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #00e5ff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 1rem 0;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }

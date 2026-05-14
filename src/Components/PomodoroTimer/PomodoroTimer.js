@@ -43,8 +43,12 @@ function PomodoroTimer({ task }) {
         ))}
       </div>
       <div className="pomodoro-timer">
-        {formatTime()}
+        <span className="pomodoro-timer-minutes">{formatTime().split(':')[0]}</span>
+        <span className="pomodoro-timer-seconds">{formatTime().split(':')[1]}</span>
       </div>
+      <p className="pomodoro-status">
+        {isActive ? 'Enfocado en la tarea...' : 'Listo para iniciar tarea'}
+      </p>
       <div className="pomodoro-controls">
         <button
           className={`pomodoro-btn ${isActive ? 'pause' : 'play'}`}
@@ -62,10 +66,8 @@ function PomodoroTimer({ task }) {
         </button>
       </div>
 
-      <p className="pomodoro-status">
-        {isActive ? 'Enfocado en la tarea...' : 'Listo para iniciar tarea'}
-      </p>
       <div className='pomodoro-objectives'>
+        <h3 className="objectives-heading">Objetivos</h3>
         {task.objectives && task.objectives.length > 0 ? (
           <ul className="objectives-list">
             {task.objectives.map((obj) => (
