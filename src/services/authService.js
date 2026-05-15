@@ -49,4 +49,11 @@ export const authService = {
     const { data } = await authAxios.post('/auth/verify-email', { token });
     return data;
   },
+
+  async getCurrentUser() {
+    // Importación dinámica para evitar dependencia circular con apiClient
+    const { apiClient } = await import('./apiClient');
+    const { data } = await apiClient.get('/auth/me');
+    return data;
+  },
 };

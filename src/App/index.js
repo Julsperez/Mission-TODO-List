@@ -1,11 +1,14 @@
+import { AuthProvider } from '../context/AuthContext';
 import { TodoProvider } from '../TodoContext';
 import { AppContext } from '../App/AppContext';
 
 function App() {
   return (
-    <TodoProvider>
-      <AppContext />
-    </TodoProvider>
+    <AuthProvider>
+      <TodoProvider>
+        <AppContext />
+      </TodoProvider>
+    </AuthProvider>
   );
 }
 
