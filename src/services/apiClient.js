@@ -4,6 +4,7 @@ import { tokenService } from './tokenService';
 const apiClient = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
   timeout: 10000,
+  withCredentials: true,
 });
 
 let isRefreshing = false;
@@ -39,7 +40,7 @@ apiClient.interceptors.response.use(
 
     // El refresh también falló — limpiar sesión y redirigir
     if (originalRequest._retry) {
-      tokenService.clearTokens();
+      tokenService.clearAccess();
       window.location.href = '/login';
       return Promise.reject(error);
     }
@@ -60,9 +61,8 @@ apiClient.interceptors.response.use(
     try {
       // Importación dinámica para evitar dependencia circular en el módulo
       const { authService } = await import('./authService');
-      const { accessToken, refreshToken } = await authService.refreshToken();
-
-      tokenService.setTokens(accessToken, refreshToken);
+      const { accessToken } = await authService.refreshToken();
+      // setAccess ya fue llamado dentro de authService.refreshToken()
       apiClient.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
       originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
@@ -70,7 +70,7 @@ apiClient.interceptors.response.use(
       return apiClient(originalRequest);
     } catch (refreshError) {
       processQueue(refreshError, null);
-      tokenService.clearTokens();
+      tokenService.clearAccess();
       window.location.href = '/login';
       return Promise.reject(refreshError);
     } finally {

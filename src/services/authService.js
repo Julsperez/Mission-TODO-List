@@ -6,12 +6,13 @@ import { tokenService } from './tokenService';
 const authAxios = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
   timeout: 10000,
+  withCredentials: true,
 });
 
 export const authService = {
   async login(email, password) {
     const { data } = await authAxios.post('/auth/login', { email, password });
-    tokenService.setTokens(data.accessToken, data.refreshToken);
+    tokenService.setAccess(data.accessToken);
     return data;
   },
 
@@ -22,16 +23,15 @@ export const authService = {
 
   async logout() {
     try {
-      const token = tokenService.getRefresh();
-      await authAxios.post('/auth/logout', { refreshToken: token });
+      await authAxios.post('/auth/logout');
     } finally {
-      tokenService.clearTokens();
+      tokenService.clearAccess();
     }
   },
 
   async refreshToken() {
-    const token = tokenService.getRefresh();
-    const { data } = await authAxios.post('/auth/refresh', { refreshToken: token });
+    const { data } = await authAxios.post('/auth/refresh-token');
+    tokenService.setAccess(data.accessToken);
     return data; // { accessToken, refreshToken }
   },
 
@@ -53,7 +53,7 @@ export const authService = {
   async getCurrentUser() {
     // Importación dinámica para evitar dependencia circular con apiClient
     const { apiClient } = await import('./apiClient');
-    const { data } = await apiClient.get('/auth/me');
+    const { data } = await apiClient.get('/users/me');
     return data;
   },
 };
