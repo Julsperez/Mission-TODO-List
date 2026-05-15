@@ -1,19 +1,14 @@
 import React from 'react';
-import { useLocalStorage } from './useLocalStorage';
+import { todosService } from '../services/todosService';
 
 const TodoContext = React.createContext();
 
 function TodoProvider({ children }) {
 
-	// Custom hook para manejar el localStorage
-	const {
-		item: todos,
-		updateItem: setTodos,
-		loading,
-		error
-	} = useLocalStorage(process.env.REACT_APP_TODOS_KEY, []);
+	const [todos, setTodos] = React.useState([]);
+	const [loading, setLoading] = React.useState(true);
+	const [error, setError] = React.useState(false);
 
-	// Componente padre debe manejar los estados de los componentes hijos
 	const [searchValue, setSearchValue] = React.useState('');
 	const [openTaskModal, setOpenTaskModal] = React.useState(false);
 	const [isEditTask, setIsEditTask] = React.useState(false);
@@ -21,7 +16,13 @@ function TodoProvider({ children }) {
 	const [task, setTask] = React.useState({});
 	const [isShowPomodoro, setIsShowPomodoro] = React.useState(false);
 
-	// Estados derivados, son variables calculadas a partir de otros estados
+	React.useEffect(() => {
+		todosService.getTodos()
+			.then(data => setTodos(data))
+			.catch(() => setError(true))
+			.finally(() => setLoading(false));
+	}, []);
+
 	const totalTodos = todos.filter(todo => todo.status !== 'archived').length;
 	const completedTodos = todos.filter(todo => todo.status === 'completed').length;
 	const searchedTodos = React.useMemo(
@@ -31,24 +32,44 @@ function TodoProvider({ children }) {
 		[todos, searchValue]
 	);
 
-	const updateTodo = React.useCallback((updatedTodo) => {
+	const updateTodo = React.useCallback(async (updatedTodo) => {
 		const normalized = {
 			...updatedTodo,
-			isCompleted: updatedTodo.status === 'completed'
+			isCompleted: updatedTodo.status === 'completed',
 		};
-		setTodos(prev => {
-			const exists = prev.some(t => t.missionId === normalized.missionId);
-			return exists
-				? prev.map(t => t.missionId === normalized.missionId ? normalized : t)
-				: [normalized, ...prev];
-		});
-	}, [setTodos]);
+		const isNew = !todos.some(t => t.missionId === normalized.missionId);
 
-	const deleteTodo = React.useCallback((missionId) => {
+		setTodos(prev =>
+			isNew
+				? [normalized, ...prev]
+				: prev.map(t => t.missionId === normalized.missionId ? normalized : t)
+		);
+
+		try {
+			const saved = isNew
+				? await todosService.createTodo(normalized)
+				: await todosService.updateTodo(normalized);
+
+			if (isNew && saved?.missionId && saved.missionId !== normalized.missionId) {
+				setTodos(prev =>
+					prev.map(t => t.missionId === normalized.missionId ? saved : t)
+				);
+			}
+		} catch {
+			setError(true);
+		}
+	}, [todos]);
+
+	const deleteTodo = React.useCallback(async (missionId) => {
 		setTodos(prev => prev.filter(t => t.missionId !== missionId));
-	}, [setTodos]);
+		try {
+			await todosService.deleteTodo(missionId);
+		} catch {
+			setError(true);
+		}
+	}, []);
 
-	const toggleObjective = React.useCallback((missionId, objectiveId) => {
+	const toggleObjective = React.useCallback(async (missionId, objectiveId) => {
 		const todo = todos.find(t => t.missionId === missionId);
 		if (!todo) return;
 		const updatedTask = {
@@ -57,11 +78,11 @@ function TodoProvider({ children }) {
 				obj.objectiveId === objectiveId
 					? { ...obj, isCompleted: !obj.isCompleted }
 					: obj
-			)
+			),
 		};
-		updateTodo(updatedTask);
+		await updateTodo(updatedTask);
 		setTask(updatedTask);
-	}, [todos, updateTodo, setTask]);
+	}, [todos, updateTodo]);
 
 	return (
 		<TodoContext.Provider value={{
@@ -71,7 +92,6 @@ function TodoProvider({ children }) {
 			totalTodos,
 			searchedTodos,
 			todos,
-			setTodos,
 			updateTodo,
 			deleteTodo,
 			toggleObjective,
