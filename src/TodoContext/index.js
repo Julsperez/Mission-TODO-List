@@ -69,6 +69,14 @@ function TodoProvider({ children }) {
 		}
 	}, []);
 
+	const refreshTodos = React.useCallback(() => {
+		setLoading(true);
+		todosService.getTodos()
+			.then(data => setTodos(data))
+			.catch(() => setError(true))
+			.finally(() => setLoading(false));
+	}, []);
+
 	const toggleObjective = React.useCallback(async (missionId, objectiveId) => {
 		const todo = todos.find(t => t.missionId === missionId);
 		if (!todo) return;
@@ -95,6 +103,7 @@ function TodoProvider({ children }) {
 			updateTodo,
 			deleteTodo,
 			toggleObjective,
+			refreshTodos,
 			searchValue,
 			setSearchValue,
 			openTaskModal,

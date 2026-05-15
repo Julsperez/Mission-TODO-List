@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
 import { TodoProvider } from '../TodoContext';
 import { AppContext } from './AppContext';
+import { MigrationModal } from '../Components';
 import { PrivateRoute } from '../Components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from '../Components/PublicRoute/PublicRoute';
 import LoginPage from '../pages/auth/LoginPage';
@@ -31,6 +32,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/" element={
               <TodoProvider>
+                <MigrationModal />
                 <AppContext />
               </TodoProvider>
             } />
