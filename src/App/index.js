@@ -4,10 +4,11 @@ import { TodoProvider } from '../TodoContext';
 import { AppContext } from './AppContext';
 import { PrivateRoute } from '../Components/PrivateRoute/PrivateRoute';
 import { PublicRoute } from '../Components/PublicRoute/PublicRoute';
-import LoginPage from '../pages/LoginPage';
-import RegisterPage from '../pages/RegisterPage';
-import VerifyEmailPage from '../pages/VerifyEmailPage';
-import ResetPasswordPage from '../pages/ResetPasswordPage';
+import LoginPage from '../pages/auth/LoginPage';
+import RegisterPage from '../pages/auth/RegisterPage';
+import VerifyEmailPage from '../pages/auth/VerifyEmailPage';
+import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/auth/ResetPasswordPage';
 
 function App() {
   return (
@@ -19,9 +20,12 @@ function App() {
           <Route element={<PublicRoute />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/verify-email" element={<VerifyEmailPage />} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           </Route>
+
+          {/* Rutas neutras — accesibles con o sin sesión (token en URL) */}
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
 
           {/* Rutas privadas — redirigen a /login si no autenticado */}
           <Route element={<PrivateRoute />}>
@@ -32,7 +36,6 @@ function App() {
             } />
           </Route>
 
-          {/* Catch-all */}
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>
