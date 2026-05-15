@@ -8,6 +8,7 @@ function TodoProvider({ children }) {
 	const [todos, setTodos] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
 	const [error, setError] = React.useState(false);
+	const [toast, setToast] = React.useState(null);
 
 	const [searchValue, setSearchValue] = React.useState('');
 	const [openTaskModal, setOpenTaskModal] = React.useState(false);
@@ -22,6 +23,12 @@ function TodoProvider({ children }) {
 			.catch(() => setError(true))
 			.finally(() => setLoading(false));
 	}, []);
+
+	const showToast = React.useCallback((message, type = 'error') => {
+		setToast({ message, type });
+	}, []);
+
+	const dismissToast = React.useCallback(() => setToast(null), []);
 
 	const totalTodos = todos.filter(todo => todo.status !== 'archived').length;
 	const completedTodos = todos.filter(todo => todo.status === 'completed').length;
@@ -38,6 +45,7 @@ function TodoProvider({ children }) {
 			isCompleted: updatedTodo.status === 'completed',
 		};
 		const isNew = !todos.some(t => t.missionId === normalized.missionId);
+		const prevTodos = todos;
 
 		setTodos(prev =>
 			isNew
@@ -56,18 +64,21 @@ function TodoProvider({ children }) {
 				);
 			}
 		} catch {
-			setError(true);
+			setTodos(prevTodos);
+			showToast('No se pudo guardar la misión. Inténtalo de nuevo.');
 		}
-	}, [todos]);
+	}, [todos, showToast]);
 
 	const deleteTodo = React.useCallback(async (missionId) => {
+		const prevTodos = todos;
 		setTodos(prev => prev.filter(t => t.missionId !== missionId));
 		try {
 			await todosService.deleteTodo(missionId);
 		} catch {
-			setError(true);
+			setTodos(prevTodos);
+			showToast('No se pudo borrar la misión. Inténtalo de nuevo.');
 		}
-	}, []);
+	}, [todos, showToast]);
 
 	const refreshTodos = React.useCallback(() => {
 		setLoading(true);
@@ -104,6 +115,9 @@ function TodoProvider({ children }) {
 			deleteTodo,
 			toggleObjective,
 			refreshTodos,
+			toast,
+			showToast,
+			dismissToast,
 			searchValue,
 			setSearchValue,
 			openTaskModal,

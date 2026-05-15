@@ -10,3 +10,4 @@ export { TodoSearch } from './TodoSearch/TodoSearch';
 export { TodoShowInfo } from './TodoShowInfo/TodoShowInfo';
 export { PomodoroTimer } from './PomodoroTimer/PomodoroTimer';
 export { MigrationModal } from './MigrationModal/MigrationModal';
+export { Toast } from './Toast/Toast';

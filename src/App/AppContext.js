@@ -10,7 +10,8 @@ import {
   Modal,
   TodoForm,
   TodoShowInfo,
-  PomodoroTimer
+  PomodoroTimer,
+  Toast
 } from '../Components';
 import "./App.css"
 
@@ -30,8 +31,12 @@ function AppContext() {
     task,
     setTask,
     isShowPomodoro,
-    setIsShowPomodoro
+    setIsShowPomodoro,
+    toast,
+    dismissToast
   } = React.useContext(TodoContext);
+
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const handleCloseModal = () => {
     setOpenTaskModal(false);
@@ -41,9 +46,14 @@ function AppContext() {
     setTask({});
   };
 
-  const handleSubmitTodo = (newTodo) => {
-    updateTodo(newTodo);
-    handleCloseModal();
+  const handleSubmitTodo = async (newTodo) => {
+    setIsSubmitting(true);
+    try {
+      await updateTodo(newTodo);
+    } finally {
+      setIsSubmitting(false);
+      handleCloseModal();
+    }
   };
 
   return (
@@ -97,6 +107,7 @@ function AppContext() {
                       editView={isEditTask}
                       onSubmit={handleSubmitTodo}
                       onCancel={handleCloseModal}
+                      isSubmitting={isSubmitting}
                     />
                   }
                 </Modal>
@@ -104,6 +115,7 @@ function AppContext() {
 
             </>
           )}
+      {toast && <Toast message={toast.message} type={toast.type} onDismiss={dismissToast} />}
     </div>
   );
 }
