@@ -12,7 +12,8 @@ function TodoItem({ todo, onItemUpdated }) {
   } = React.useContext(TodoContext);
 
   const today = new Date().toISOString().split('T')[0];
-  const isOverdue = todo.dueDate && !todo.isCompleted && todo.dueDate < today;
+  const dueDateStr = todo.dueDate ? todo.dueDate.split('T')[0] : null;
+  const isOverdue = dueDateStr && todo.status !== 'completed' && dueDateStr < today;
   const totalObjectives = (todo.objectives || []).length;
   const completedObjectives = (todo.objectives || []).filter(o => o.isCompleted).length;
 
@@ -46,10 +47,10 @@ function TodoItem({ todo, onItemUpdated }) {
       <div className="missionCard-header">
         <span className={`
           missionLabel 
-          ${todo.typeofMission === "side" ? "side" : "main"}
+          ${todo.typeofMission === 'side' ? 'side' : 'main'}
           ${todo.status === "archived" && "archived"}
         `}>
-          {todo.typeofMission === "main" ? "Principal" : "Secundaria"}
+          {todo.typeofMission === 'side' ? 'Secundaria' : 'Principal'}
         </span>
         <OverflowMenu 
           todoItem={todo}

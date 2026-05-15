@@ -18,10 +18,13 @@ function TodoProvider({ children }) {
 	const [isShowPomodoro, setIsShowPomodoro] = React.useState(false);
 
 	React.useEffect(() => {
+		let cancelled = false;
+		setError(false);
 		todosService.getTodos()
-			.then(data => setTodos(data))
-			.catch(() => setError(true))
-			.finally(() => setLoading(false));
+			.then(data  => { if (!cancelled) setTodos(data); })
+			.catch(()   => { if (!cancelled) setError(true); })
+			.finally(() => { if (!cancelled) setLoading(false); });
+		return () => { cancelled = true; };
 	}, []);
 
 	const showToast = React.useCallback((message, type = 'error') => {
@@ -44,44 +47,49 @@ function TodoProvider({ children }) {
 			...updatedTodo,
 			isCompleted: updatedTodo.status === 'completed',
 		};
-		const isNew = !todos.some(t => t.missionId === normalized.missionId);
-		const prevTodos = todos;
 
-		setTodos(prev =>
-			isNew
+		let prevSnapshot;
+		let isNew;
+		setTodos(prev => {
+			prevSnapshot = prev;
+			isNew = !prev.some(t => t.missionId === normalized.missionId);
+			return isNew
 				? [normalized, ...prev]
-				: prev.map(t => t.missionId === normalized.missionId ? normalized : t)
-		);
+				: prev.map(t => t.missionId === normalized.missionId ? normalized : t);
+		});
 
 		try {
 			const saved = isNew
 				? await todosService.createTodo(normalized)
 				: await todosService.updateTodo(normalized);
 
-			if (isNew && saved?.missionId && saved.missionId !== normalized.missionId) {
-				setTodos(prev =>
-					prev.map(t => t.missionId === normalized.missionId ? saved : t)
-				);
-			}
+			// Reemplaza el todo optimista con la respuesta del servidor (incluye id, createdAt, etc.)
+			setTodos(prev =>
+				prev.map(t => t.missionId === normalized.missionId ? { ...t, ...saved } : t)
+			);
 		} catch {
-			setTodos(prevTodos);
+			setTodos(prevSnapshot);
 			showToast('No se pudo guardar la misión. Inténtalo de nuevo.');
 		}
-	}, [todos, showToast]);
+	}, [showToast]);
 
 	const deleteTodo = React.useCallback(async (missionId) => {
-		const prevTodos = todos;
-		setTodos(prev => prev.filter(t => t.missionId !== missionId));
+		let prevSnapshot;
+		setTodos(prev => {
+			prevSnapshot = prev;
+			return prev.filter(t => t.missionId !== missionId);
+		});
 		try {
 			await todosService.deleteTodo(missionId);
 		} catch {
-			setTodos(prevTodos);
+			setTodos(prevSnapshot);
 			showToast('No se pudo borrar la misión. Inténtalo de nuevo.');
 		}
-	}, [todos, showToast]);
+	}, [showToast]);
 
 	const refreshTodos = React.useCallback(() => {
 		setLoading(true);
+		setError(false);
 		todosService.getTodos()
 			.then(data => setTodos(data))
 			.catch(() => setError(true))
@@ -100,7 +108,7 @@ function TodoProvider({ children }) {
 			),
 		};
 		await updateTodo(updatedTask);
-		setTask(updatedTask);
+		setTask(prev => ({ ...prev, ...updatedTask }));
 	}, [todos, updateTodo]);
 
 	return (

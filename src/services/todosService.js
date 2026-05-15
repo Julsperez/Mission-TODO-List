@@ -6,16 +6,24 @@ export const todosService = {
 		return data;
 	},
 	async createTodo(todo) {
-		const { data } = await apiClient.post('/api/v1/todos', todo);
+		const { missionId, title, subtitle, description, status, typeofMission, dueDate, objectives } = todo;
+    const { data } = await apiClient.post('/api/v1/todos', {
+      missionId, title, subtitle, description, status, typeofMission, dueDate, objectives,
+    });
 		return data;
 	},
 	async updateTodo(todo) {
-		const { data } = await apiClient.put(`/api/v1/todos/${todo.missionId}`, todo);
+		const { missionId, title, subtitle, description, status, typeofMission, dueDate, objectives } = todo;
+    const { data } = await apiClient.patch(`/api/v1/todos/${missionId}`, {
+      title, subtitle, description, status, typeofMission, dueDate, objectives,
+    });
 		return data;
 	},
+
 	async deleteTodo(missionId) {
 		await apiClient.delete(`/api/v1/todos/${missionId}`);
 	},
+
 	async migrateTodos(todos) {
 		const { data } = await apiClient.post('/api/v1/todos/migrate', { todos });
 		return data;
