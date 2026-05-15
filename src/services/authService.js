@@ -41,7 +41,7 @@ export const authService = {
   },
 
   async resetPassword(token, newPassword) {
-    const { data } = await authAxios.post('/auth/reset-password', { token, newPassword });
+    const { data } = await authAxios.post('/auth/reset-password', { token, password: newPassword });
     return data;
   },
 

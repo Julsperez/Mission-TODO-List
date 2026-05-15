@@ -39,6 +39,24 @@ div.modalButton {
     cursor: pointer;
 }
 
+.logoutButton {
+  align-self: flex-end;
+  background: none;
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  border-radius: 6px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 0.25rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.logoutButton:hover {
+  background: var(--color-danger);
+  color: #fff;
+}
+
 @media (min-width: 480px) {
     div#app-container {
         padding: 1rem 3rem;

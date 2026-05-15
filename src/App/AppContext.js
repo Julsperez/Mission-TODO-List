@@ -1,6 +1,7 @@
 import React from "react";
 import { HiOutlineXCircle } from "react-icons/hi";
 import { TodoContext } from "../TodoContext";
+import { useAuth } from "../Hooks/useAuth";
 import {
   CreateTodoButton,
   TodoCounter,
@@ -14,6 +15,7 @@ import {
 import "./App.css"
 
 function AppContext() {
+  const { logout } = useAuth();
   const {
     error,
     loading,
@@ -60,6 +62,9 @@ function AppContext() {
 
               <div className='appContainerHeader'>
                 <TodoCounter />
+                <button onClick={logout} className="logoutButton">
+                 Cerrar sesión
+                </button>
               </div>
               {
                 !!searchedTodos.length ? (
