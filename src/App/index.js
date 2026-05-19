@@ -13,6 +13,7 @@ import RegisterPage from '../pages/auth/RegisterPage';
 import VerifyEmailPage from '../pages/auth/VerifyEmailPage';
 import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from '../pages/auth/ResetPasswordPage';
+import SettingsPage from '../pages/settings/SettingsPage';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
                   <AppContext />
                 </TodoProvider>
               } />
+              <Route path="/settings" element={<SettingsPage />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />

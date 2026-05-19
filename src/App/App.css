@@ -46,6 +46,25 @@ div.modalButton {
   align-self: flex-end;
 }
 
+.settingsButton {
+  background: none;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.settingsButton:hover {
+  background: var(--bg-input);
+  border-color: var(--color-star-glow);
+  color: var(--color-text-primary);
+}
+
 .logoutButton {
   background: none;
   border: 1px solid var(--color-danger);

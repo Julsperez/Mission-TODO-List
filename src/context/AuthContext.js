@@ -52,8 +52,12 @@ function AuthProvider({ children }) {
   const register = async (name, email, password) =>
     authService.register(name, email, password);
 
+  const updateUser = React.useCallback((updates) => {
+    setUser(prev => prev ? { ...prev, ...updates } : prev);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, logout, register, pendingMigrationTodos, clearPendingMigration }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, logout, register, pendingMigrationTodos, clearPendingMigration, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

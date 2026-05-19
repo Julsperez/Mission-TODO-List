@@ -1,6 +1,7 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { HiOutlineXCircle } from "react-icons/hi";
+import { HiOutlineXCircle, HiOutlineCog } from "react-icons/hi";
 import { TodoContext } from "../TodoContext";
 import { useAuth } from "../Hooks/useAuth";
 import {
@@ -20,6 +21,7 @@ import "./App.css"
 function AppContext() {
   const { t } = useTranslation();
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const {
     error,
     loading,
@@ -69,6 +71,9 @@ function AppContext() {
               <div className='appContainerHeader'>
                 <TodoCounter />
                 <div className="appHeaderActions">
+                  <button onClick={() => navigate('/settings')} className="settingsButton" aria-label={t('app.settings_aria')} title={t('app.settings_aria')}>
+                    <HiOutlineCog aria-hidden="true" />
+                  </button>
                   <ThemeToggle />
                   <button onClick={logout} className="logoutButton">
                     {t('app.logout')}
