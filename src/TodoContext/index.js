@@ -1,4 +1,5 @@
 import React from 'react';
+import i18n from '../i18n';
 import { todosService } from '../services/todosService';
 
 const TodoContext = React.createContext();
@@ -69,7 +70,7 @@ function TodoProvider({ children }) {
 			);
 		} catch {
 			setTodos(prevSnapshot);
-			showToast('No se pudo guardar la misión. Inténtalo de nuevo.');
+			showToast(i18n.t('errors.save_mission'));
 		}
 	}, [showToast]);
 
@@ -83,7 +84,7 @@ function TodoProvider({ children }) {
 			await todosService.deleteTodo(missionId);
 		} catch {
 			setTodos(prevSnapshot);
-			showToast('No se pudo borrar la misión. Inténtalo de nuevo.');
+			showToast(i18n.t('errors.delete_mission'));
 		}
 	}, [showToast]);
 

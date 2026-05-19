@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { authService } from '../../services/authService';
 import './auth.css';
 
 function RegisterPage() {
+  const { t } = useTranslation();
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('');
@@ -20,7 +22,7 @@ function RegisterPage() {
       await authService.register(form.name, form.email, form.password);
       setSuccess(true);
     } catch (err) {
-      setServerError(err.response?.data?.message || 'Error al crear la cuenta. Intenta de nuevo.');
+      setServerError(err.response?.data?.message || t('auth.register.error_default'));
     } finally {
       setLoading(false);
     }
@@ -31,16 +33,14 @@ function RegisterPage() {
       <div className="auth-page">
         <div className="auth-card auth-success">
           <p className="auth-success-icon">📡</p>
-          <h2 className="auth-title">¡Misión iniciada!</h2>
-          <p className="auth-subtitle">
-            Revisa tu email para confirmar tu cuenta antes de iniciar sesión.
-          </p>
+          <h2 className="auth-title">{t('auth.register.success_title')}</h2>
+          <p className="auth-subtitle">{t('auth.register.success_subtitle')}</p>
           <Link
             to="/login"
             className="auth-btn"
             style={{ textAlign: 'center', textDecoration: 'none', display: 'block' }}
           >
-            Ir al login
+            {t('auth.register.success_btn')}
           </Link>
         </div>
       </div>
@@ -50,40 +50,40 @@ function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1 className="auth-title">Crear cuenta</h1>
-        <p className="auth-subtitle">Únete a la flota espacial</p>
+        <h1 className="auth-title">{t('auth.register.title')}</h1>
+        <p className="auth-subtitle">{t('auth.register.subtitle')}</p>
         {serverError && <div className="auth-server-error">{serverError}</div>}
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
           <div className="auth-group">
-            <label className="auth-label" htmlFor="name">Nombre</label>
+            <label className="auth-label" htmlFor="name">{t('auth.register.name_label')}</label>
             <input
               id="name" name="name" type="text" required
               className="auth-input" value={form.name} onChange={handleChange}
-              placeholder="Comandante Orion" autoComplete="name"
+              placeholder={t('auth.register.ph_name')} autoComplete="name"
             />
           </div>
           <div className="auth-group">
-            <label className="auth-label" htmlFor="email">Email</label>
+            <label className="auth-label" htmlFor="email">{t('common.email')}</label>
             <input
               id="email" name="email" type="email" required
               className="auth-input" value={form.email} onChange={handleChange}
-              placeholder="comandante@galaxia.com" autoComplete="email"
+              placeholder={t('auth.register.ph_email')} autoComplete="email"
             />
           </div>
           <div className="auth-group">
-            <label className="auth-label" htmlFor="password">Contraseña</label>
+            <label className="auth-label" htmlFor="password">{t('auth.login.password_label')}</label>
             <input
               id="password" name="password" type="password" required minLength={8}
               className="auth-input" value={form.password} onChange={handleChange}
-              placeholder="Mínimo 8 caracteres" autoComplete="new-password"
+              placeholder={t('auth.register.ph_password')} autoComplete="new-password"
             />
           </div>
           <button type="submit" className="auth-btn" disabled={loading}>
-            {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+            {loading ? t('auth.register.btn_loading') : t('auth.register.btn')}
           </button>
         </form>
         <div className="auth-link-row">
-          <Link to="/login">¿Ya tienes cuenta? Inicia sesión</Link>
+          <Link to="/login">{t('auth.register.login_link')}</Link>
         </div>
       </div>
     </div>

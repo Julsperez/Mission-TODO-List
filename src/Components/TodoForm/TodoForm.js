@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from 'react-i18next';
 import { HiCheck } from "react-icons/hi";
 import { TodoContext } from "../../TodoContext";
 
 import "./TodoForm.css";
 
 function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) {
+  const { t } = useTranslation();
   const { openTaskModal } = React.useContext(TodoContext);
   const [formData, setFormData] = useState(() => ({
     missionId: crypto.randomUUID(),
@@ -124,18 +126,18 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
   return (
     <form className="todoFormContainer" onSubmit={handleSubmit}>
       <h2 id="modal-title" className="todoForm-title">
-        {editView ? "Editar Misión" : "Crear Nueva Misión"}
+        {editView ? t('form.title_edit') : t('form.title_create')}
       </h2>
 
       <div className="formBodyContainer">
         {/* Basic Info Section */}
         <div className="todoForm-section">
-          <h3 className="todoForm-sectionTitle">Información Básica</h3>
+          <h3 className="todoForm-sectionTitle">{t('form.section_basic')}</h3>
 
           <div className="todoForm-group">
             <label htmlFor="title" className="todoForm-label">
-              Título
-              <span className="required-field">* requerido</span>
+              {t('form.label_title')}
+              <span className="required-field">{t('form.required')}</span>
             </label>
             <input
               type="text"
@@ -144,27 +146,27 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              placeholder="Ej: Diseño de Proyecto"
+              placeholder={t('form.ph_title')}
               className="todoForm-input"
               required
             />
           </div>
 
           <div className="todoForm-group">
-            <label htmlFor="subtitle" className="todoForm-label">Subtítulo</label>
+            <label htmlFor="subtitle" className="todoForm-label">{t('form.label_subtitle')}</label>
             <input
               type="text"
               id="subtitle"
               name="subtitle"
               value={formData.subtitle}
               onChange={handleInputChange}
-              placeholder="Ej: Planificación General"
+              placeholder={t('form.ph_subtitle')}
               className="todoForm-input"
             />
           </div>
 
           <div className="todoForm-group">
-            <label htmlFor="dueDate" className="todoForm-label">Fecha de vencimiento</label>
+            <label htmlFor="dueDate" className="todoForm-label">{t('form.label_due_date')}</label>
             <input
               type="date"
               id="dueDate"
@@ -176,13 +178,13 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
           </div>
 
           <div className="todoForm-group">
-            <label htmlFor="description" className="todoForm-label">Descripción</label>
+            <label htmlFor="description" className="todoForm-label">{t('form.label_desc')}</label>
             <textarea
               id="description"
               name="description"
               value={formData.description}
               onChange={handleInputChange}
-              placeholder="Describe detalladamente la misión"
+              placeholder={t('form.ph_desc')}
               className="todoForm-textarea"
               rows="4"
             ></textarea>
@@ -191,18 +193,18 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
 
         {/* Status Section */}
         <div className="todoForm-section">
-          <h3 className="todoForm-sectionTitle">Estado</h3>
+          <h3 className="todoForm-sectionTitle">{t('form.section_status')}</h3>
 
           <div className="todoForm-group">
-            <label className="todoForm-label">Tipo de Misión</label>
-            <div className="segmentedControl" role="group" aria-label="Tipo de Misión">
+            <label className="todoForm-label">{t('form.label_type')}</label>
+            <div className="segmentedControl" role="group" aria-label={t('form.label_type')}>
               <button
                 type="button"
                 className={`segmentedControl-btn${formData.typeofMission === 'main' ? ' active' : ''}`}
                 onClick={() => setFormData(prev => ({ ...prev, typeofMission: 'main' }))}
                 aria-pressed={formData.typeofMission === 'main'}
               >
-                Principal (Main)
+                {t('form.type_main')}
               </button>
               <button
                 type="button"
@@ -210,21 +212,21 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
                 onClick={() => setFormData(prev => ({ ...prev, typeofMission: 'side' }))}
                 aria-pressed={formData.typeofMission === 'side'}
               >
-                Secundaria (Side)
+                {t('form.type_side')}
               </button>
             </div>
           </div>
 
           <div className="todoForm-group">
-            <label className="todoForm-label">Estado</label>
-            <div className="segmentedControl" role="group" aria-label="Estado">
+            <label className="todoForm-label">{t('form.label_status')}</label>
+            <div className="segmentedControl" role="group" aria-label={t('form.label_status')}>
               <button
                 type="button"
                 className={`segmentedControl-btn${formData.status === 'in-progress' ? ' active' : ''}`}
                 onClick={() => setFormData(prev => ({ ...prev, status: 'in-progress' }))}
                 aria-pressed={formData.status === 'in-progress'}
               >
-                En Progreso
+                {t('form.status_in_progress')}
               </button>
               <button
                 type="button"
@@ -232,7 +234,7 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
                 onClick={() => setFormData(prev => ({ ...prev, status: 'completed' }))}
                 aria-pressed={formData.status === 'completed'}
               >
-                Completado
+                {t('form.status_completed')}
               </button>
               <button
                 type="button"
@@ -240,7 +242,7 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
                 onClick={() => setFormData(prev => ({ ...prev, status: 'archived' }))}
                 aria-pressed={formData.status === 'archived'}
               >
-                Archivado
+                {t('form.status_archived')}
               </button>
             </div>
           </div>
@@ -262,7 +264,7 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
 
         {/* Objectives Section */}
         <div className="todoForm-section">
-          <h3 className="todoForm-sectionTitle">Objetivos</h3>
+          <h3 className="todoForm-sectionTitle">{t('form.section_objectives')}</h3>
 
           <div className="todoForm-objectivesInput">
             <input
@@ -270,7 +272,7 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
               value={newObjective}
               onChange={(e) => setNewObjective(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAddObjective()}
-              placeholder="Añade un objetivo (Enter para confirmar)"
+              placeholder={t('form.ph_objective')}
               className="todoForm-input"
             />
             <button
@@ -327,14 +329,14 @@ function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) 
           onClick={handleCancel}
           className="todoForm-button cancel"
         >
-          Cancelar
+          {t('form.btn_cancel')}
         </button>
         <button
           type="submit"
           className="todoForm-button confirm"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Guardando...' : (editView ? 'Editar Misión' : 'Crear Misión')}
+          {isSubmitting ? t('form.btn_submit_loading') : (editView ? t('form.btn_submit_edit') : t('form.btn_submit_create'))}
         </button>
       </div>
     </form>

@@ -1,6 +1,8 @@
+import '../i18n';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
 import { ThemeProvider } from '../context/ThemeContext';
+import { LanguageProvider } from '../context/LanguageContext';
 import { TodoProvider } from '../TodoContext';
 import { AppContext } from './AppContext';
 import { MigrationModal } from '../Components';
@@ -17,6 +19,7 @@ function App() {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <AuthProvider>
         <ThemeProvider>
+          <LanguageProvider>
           <Routes>
 
             {/* Rutas públicas — redirigen a / si ya autenticado */}
@@ -43,6 +46,7 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
 
           </Routes>
+          </LanguageProvider>
         </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>

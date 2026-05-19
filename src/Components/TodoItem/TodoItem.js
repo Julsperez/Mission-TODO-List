@@ -1,14 +1,16 @@
 
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import { TodoContext } from "../../TodoContext";
 import { OverflowMenu } from "../";
 import "./TodoItem.css";
 
 function TodoItem({ todo, onItemUpdated }) {
-  const { 
-    setOpenTaskModal, 
-    setIsShowTaskInfo, 
-    setTask 
+  const { t } = useTranslation();
+  const {
+    setOpenTaskModal,
+    setIsShowTaskInfo,
+    setTask
   } = React.useContext(TodoContext);
 
   const today = new Date().toISOString().split('T')[0];
@@ -50,14 +52,14 @@ function TodoItem({ todo, onItemUpdated }) {
           ${todo.typeofMission === 'side' ? 'side' : 'main'}
           ${todo.status === "archived" && "archived"}
         `}>
-          {todo.typeofMission === 'side' ? 'Secundaria' : 'Principal'}
+          {todo.typeofMission === 'side' ? t('item.type_side') : t('item.type_main')}
         </span>
         <OverflowMenu 
           todoItem={todo}
           onSelectedOption={handleSelectedOption}
         />
       </div>
-      {isOverdue && <span className="overdue-badge">Vencida</span>}
+      {isOverdue && <span className="overdue-badge">{t('item.overdue')}</span>}
       <h3
         className={
           `missionCard-title ${
@@ -74,7 +76,7 @@ function TodoItem({ todo, onItemUpdated }) {
         </p>
       {totalObjectives > 0 && (
         <p className="missionCard-objectives">
-          {completedObjectives} de {totalObjectives} objetivos
+          {t('item.objectives', { completed: completedObjectives, total: totalObjectives })}
         </p>
       )}
     </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import {
   HiCheck,
   HiPencilAlt,
@@ -12,6 +13,7 @@ import { TodoContext } from "../../TodoContext";
 import "./OverflowMenu.css";
 
 function OverflowMenu({ todoItem, onSelectedOption }) {
+  const { t } = useTranslation();
   const {
     setOpenTaskModal,
     setIsEditTask,
@@ -91,7 +93,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                   role="menuitem"
                   tabIndex={0}
                 >
-                  Completar
+                  {t('overflow_menu.complete')}
                   <HiCheck className="option-icon" />
                 </span>
 
@@ -109,7 +111,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                     role="menuitem"
                     tabIndex={0}
                   >
-                    Pomodoro
+                    {t('overflow_menu.pomodoro')}
                     <HiOutlineClock className="option-icon" />
                   </span>
                 )}
@@ -126,7 +128,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                   role="menuitem"
                   tabIndex={0}
                 >
-                  Archivar
+                  {t('overflow_menu.archive')}
                   <HiOutlineArchive className="option-icon" />
                 </span>
               </>
@@ -142,7 +144,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                 role="menuitem"
                 tabIndex={0}
               >
-                Reactivar
+                {t('overflow_menu.reactivate')}
                 <HiOutlineReply className="option-icon" />
               </span>
             ) : (
@@ -152,7 +154,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
                 role="menuitem"
                 tabIndex={0}
               >
-                Editar
+                {t('overflow_menu.edit')}
                 <HiPencilAlt className="option-icon" />
               </span>
             )
@@ -160,19 +162,19 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
 
           {isConfirmingDelete ? (
             <div className="overflowMenu-confirmDelete" onClick={(e) => e.stopPropagation()}>
-              <span className="confirmDelete-text">¿Eliminar esta misión?</span>
+              <span className="confirmDelete-text">{t('overflow_menu.confirm_delete')}</span>
               <div className="confirmDelete-actions">
                 <button
                   className="confirmDelete-btn yes"
                   onClick={(event) => { handleOption(event, "delete"); }}
                 >
-                  Sí, borrar
+                  {t('overflow_menu.confirm_yes')}
                 </button>
                 <button
                   className="confirmDelete-btn no"
                   onClick={(event) => { event.stopPropagation(); setIsConfirmingDelete(false); }}
                 >
-                  Cancelar
+                  {t('overflow_menu.confirm_cancel')}
                 </button>
               </div>
             </div>
@@ -183,7 +185,7 @@ function OverflowMenu({ todoItem, onSelectedOption }) {
               role="menuitem"
               tabIndex={0}
             >
-              Borrar
+              {t('overflow_menu.delete')}
               <HiOutlineTrash className="option-icon" />
             </span>
           )}

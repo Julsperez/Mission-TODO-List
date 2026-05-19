@@ -36,9 +36,9 @@
     width: -webkit-fill-available;
     width: -moz-available;
     width: stretch;
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--bg-pill);
     color: var(--color-text-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-pill);
     border-radius: 10px;
 }
 
@@ -50,9 +50,9 @@ button.headerPill {
 }
 
 .headerPill.active {
-    background: rgba(0, 212, 255, 0.2);
+    background: var(--bg-pill-active);
     color: var(--color-text-primary);
-    border-color: rgba(0, 212, 255, 0.4);
+    border-color: var(--border-pill-active);
     align-items: center;
 }
 

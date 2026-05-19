@@ -20,12 +20,45 @@
   --bg-surface-elevated:   rgba(10, 10, 46, 0.92);
   --bg-surface-menu:       rgba(12, 12, 48, 0.96);
   --bg-input:              rgba(255, 255, 255, 0.06);
+  --bg-input-focus:        rgba(255, 255, 255, 0.09);
   --border-glass:          rgba(0, 212, 255, 0.25);
+  --border-input:          rgba(0, 212, 255, 0.22);
+  --border-input-focus:    rgba(0, 212, 255, 0.6);
   --overlay-bg:            rgba(5, 7, 24, 0.82);
   --gradient-start:        rgba(2, 0, 36, 0.75);
   --gradient-mid:          rgba(9, 9, 121, 0.75);
   --gradient-end:          rgba(0, 212, 255, 0.75);
   --body-bg:               #000000;
+
+  /* tokens de componentes — dark */
+  --bg-card:               rgba(10, 10, 46, 0.78);
+  --border-card:           rgba(0, 212, 255, 0.18);
+  --border-card-hover:     rgba(0, 212, 255, 0.45);
+  --bg-card-archived:      rgba(20, 20, 55, 0.5);
+  --border-card-archived:  rgba(255, 255, 255, 0.08);
+  --bg-segmented-btn:      rgba(255, 255, 255, 0.05);
+  --bg-segmented-active:   rgba(0, 212, 255, 0.15);
+  --bg-form-footer:        rgba(10, 10, 46, 0.97);
+  --border-form-footer:    rgba(0, 212, 255, 0.12);
+  --bg-objective-row:      rgba(255, 255, 255, 0.04);
+  --bg-overflow-btn:       rgba(255, 255, 255, 0.1);
+  --bg-overflow-btn-hover: rgba(255, 255, 255, 0.2);
+  --border-overflow-opt:   rgba(255, 255, 255, 0.08);
+  --bg-confirm-no:         rgba(255, 255, 255, 0.08);
+  --border-confirm-no:     rgba(255, 255, 255, 0.12);
+  --progress-track:        rgba(255, 255, 255, 0.1);
+  --bg-secondary-btn:      rgba(255, 255, 255, 0.08);
+  --border-secondary-btn:  rgba(255, 255, 255, 0.15);
+  --bg-secondary-btn-hover:rgba(255, 255, 255, 0.14);
+
+  /* search & pills */
+  --bg-search-input:       rgba(10, 10, 46, 0.88);
+  --border-search:         rgba(255, 210, 122, 0.55);
+  --border-search-focus:   rgba(255, 210, 122, 0.9);
+  --bg-pill:               rgba(255, 255, 255, 0.08);
+  --border-pill:           rgba(255, 255, 255, 0.1);
+  --bg-pill-active:        rgba(0, 212, 255, 0.2);
+  --border-pill-active:    rgba(0, 212, 255, 0.4);
 }
 
 [data-theme="light"] {

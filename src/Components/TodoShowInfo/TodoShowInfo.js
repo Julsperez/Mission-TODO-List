@@ -1,10 +1,12 @@
 
 import React, { useContext } from "react";
+import { useTranslation } from 'react-i18next';
 import { TodoContext } from "../../TodoContext";
 import "./TodoShowInfo.css";
 
 function TodoShowInfo({ task, onClose, onEdit }) {
   const { toggleObjective } = useContext(TodoContext);
+  const { t, i18n } = useTranslation();
 
   if (!task) return null;
 
@@ -29,20 +31,23 @@ function TodoShowInfo({ task, onClose, onEdit }) {
       <div className="taskInfoHeader">
         <div className="taskInfoHeadLeft">
           <span className={`missionLabel ${task.typeofMission === "side" ? "side" : "main"}`}>
-            {task.typeofMission}
+            {task.typeofMission === 'side' ? t('item.type_side') : t('item.type_main')}
           </span>
           <span className={`statusBadge ${statusClass(task.status)}`}>
             {
-              task.status === 'in-progress' ? "En progreso" :
-                task.status === 'completed' ? "Completada" :
-                  "Archivada"
+              task.status === 'in-progress' ? t('show_info.status_in_progress') :
+                task.status === 'completed' ? t('show_info.status_completed') :
+                  t('show_info.status_archived')
             }
           </span>
         </div>
         {task.dueDate && (
           <span className="dueDateBadge">
-            Vence: {new Date(task.dueDate + 'T12:00:00').toLocaleDateString('es-ES', {
-              day: 'numeric', month: 'long', year: 'numeric'
+            {t('show_info.due_date', {
+              date: new Date(task.dueDate + 'T12:00:00').toLocaleDateString(
+                i18n.language === 'en' ? 'en-US' : 'es-ES',
+                { day: 'numeric', month: 'long', year: 'numeric' }
+              )
             })}
           </span>
         )}
@@ -50,12 +55,12 @@ function TodoShowInfo({ task, onClose, onEdit }) {
 
 
       <div className="taskDescription">
-        <h3 className="sectionHeading">Descripción</h3>
-        <p>{task.description || "Sin descripción."}</p>
+        <h3 className="sectionHeading">{t('show_info.desc_heading')}</h3>
+        <p>{task.description || t('show_info.desc_empty')}</p>
       </div>
 
       <div className="taskObjectives">
-        <h3 className="sectionHeading">Objetivos</h3>
+        <h3 className="sectionHeading">{t('show_info.objectives_heading')}</h3>
         {task.objectives && task.objectives.length > 0 ? (
           <div className="objectivesList">
             {task.objectives.map((obj) => (
@@ -71,13 +76,13 @@ function TodoShowInfo({ task, onClose, onEdit }) {
             ))}
           </div>
         ) : (
-          <p className="noObjectives">No hay objetivos añadidos.</p>
+          <p className="noObjectives">{t('show_info.objectives_empty')}</p>
         )}
       </div>
 
       <div className="taskFooter">
-        <button className="taskBtn secondary" onClick={() => onEdit && onEdit()}>Editar</button>
-        <button className="taskBtn primary" onClick={onClose}>Cerrar</button>
+        <button className="taskBtn secondary" onClick={() => onEdit && onEdit()}>{t('show_info.btn_edit')}</button>
+        <button className="taskBtn primary" onClick={onClose}>{t('show_info.btn_close')}</button>
       </div>
     </div>
   );

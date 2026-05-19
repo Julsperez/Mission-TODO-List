@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import { HiOutlineXCircle } from "react-icons/hi";
 import { TodoContext } from "../TodoContext";
 import { useAuth } from "../Hooks/useAuth";
@@ -17,6 +18,7 @@ import {
 import "./App.css"
 
 function AppContext() {
+  const { t } = useTranslation();
   const { logout } = useAuth();
   const {
     error,
@@ -53,11 +55,11 @@ function AppContext() {
   return (
     <div id="app-container" className='AppContainer'>
       {loading ?
-        <h2 className='appLoadingMessage'>Cargando datos de misiones...</h2> :
+        <h2 className='appLoadingMessage'>{t('app.loading')}</h2> :
         error ?
           (
             <>
-              <h2 className='appLoadingMessage'>Hubo un error al cargar las misiones.</h2> 
+              <h2 className='appLoadingMessage'>{t('app.error')}</h2> 
               {/* <button onClick={() => alert(localStorage.getItem('defaultTodosV1'))}>Debug button</button> */}
             </>
           ):
@@ -69,21 +71,21 @@ function AppContext() {
                 <div className="appHeaderActions">
                   <ThemeToggle />
                   <button onClick={logout} className="logoutButton">
-                    Cerrar sesión
+                    {t('app.logout')}
                   </button>
                 </div>
               </div>
               {
                 !!searchedTodos.length ? (
                   <TodoList />
-                ) : <h2 className='appLoadingMessage'>¡Crea tu primera misión espacial!</h2>
+                ) : <h2 className='appLoadingMessage'>{t('app.empty_state')}</h2>
               }
               <CreateTodoButton setOpenTaskModal={setOpenTaskModal} />
               <TodoSearch />
               {openTaskModal && (
                 <Modal onClose={handleCloseModal}>
                   <div className="modalButton">
-                    <button onClick={handleCloseModal} className="closeButtonModal" aria-label="Cerrar">
+                    <button onClick={handleCloseModal} className="closeButtonModal" aria-label={t('common.close')}>
                       <HiOutlineXCircle />
                     </button>
                   </div>
