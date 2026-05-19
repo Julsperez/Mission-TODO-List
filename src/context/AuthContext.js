@@ -39,16 +39,25 @@ function AuthProvider({ children }) {
   };
 
   const logout = async () => {
-    await authService.logout();
-    setUser(null);
-    window.location.href = `${process.env.PUBLIC_URL}/login`;
+    try {
+      await authService.logout();
+    } catch {
+      // Backend no disponible — igual limpiamos la sesión local
+    } finally {
+      setUser(null);
+      window.location.href = `${process.env.PUBLIC_URL}/login`;
+    }
   };
 
   const register = async (name, email, password) =>
     authService.register(name, email, password);
 
+  const updateUser = React.useCallback((updates) => {
+    setUser(prev => prev ? { ...prev, ...updates } : prev);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, logout, register, pendingMigrationTodos, clearPendingMigration }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, isLoading, login, logout, register, pendingMigrationTodos, clearPendingMigration, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,40 +1,42 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import "./TodoCounter.css";
 import { TodoContext } from "../../TodoContext";
 
 // function TodoCounter({completedTodos, totalTodos}) {
 function TodoCounter() {
+  const { t } = useTranslation();
   const { completedTodos, totalTodos } = React.useContext(TodoContext);
   return (
     <>
       {
         totalTodos === 0 ? (
           <>
-            <h1 className="todoTitle">¡Bienvenid@ a tu lista de misiones!</h1>
-            <p className="adviceText">Comienza agregando nuevas misiones para mantenerte al dia de tus actividades.</p>
+            <h1 className="todoTitle">{t('counter.welcome_title')}</h1>
+            <p className="adviceText">{t('counter.welcome_advice')}</p>
           </>
         ) :
         completedTodos === 0 ? (
           <>
-            <h1 className="todoTitle">No has completado ninguna tarea</h1>
-            <p className="adviceText">¡Vamos! Tienes misiones que cumplir...</p>
+            <h1 className="todoTitle">{t('counter.none_completed_title')}</h1>
+            <p className="adviceText">{t('counter.none_completed_advice')}</p>
           </>
         ) : completedTodos === totalTodos ? (
           <>
-            <h1 className="todoTitle">¡Has completado todas tus misiones!</h1>
-            <p className="adviceText">¡Bien hecho! Regresa a tu base espacial a descansar</p>
+            <h1 className="todoTitle">{t('counter.all_completed_title')}</h1>
+            <p className="adviceText">{t('counter.all_completed_advice')}</p>
           </>
         ) : (
           <>
-            <h1 className="todoTitle">¡Has completado {completedTodos} de {totalTodos} misiones!</h1>
-            <p className="adviceText">La constancia y disciplina son clave para lograr tus objetivos.</p>
+            <h1 className="todoTitle">{t('counter.partial_title', { completed: completedTodos, total: totalTodos })}</h1>
+            <p className="adviceText">{t('counter.partial_advice')}</p>
           </>
         )
       }
       {totalTodos > 0 && (
         <div
           className="progressBarContainer"
-          aria-label={`Progreso: ${completedTodos} de ${totalTodos}`}
+          aria-label={t('counter.progress_aria', { completed: completedTodos, total: totalTodos })}
         >
           <div
             className="progressBar"

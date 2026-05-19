@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from 'react-i18next';
 import { TodoContext } from "../../TodoContext";
 import { HiCheck } from "react-icons/hi";
 import { ListDivider, TodoItem } from "../";
 import "./TodoList.css";
 
 function TodoList() {
+  const { t } = useTranslation();
   const { searchedTodos, updateTodo, deleteTodo } = React.useContext(TodoContext);
   const [pillIndex, setPillIndex] = React.useState(0);
 
@@ -37,7 +39,7 @@ function TodoList() {
     return searchedTodos.filter(t => t.status === "archived");
   }, [searchedTodos, pillIndex]);
 
-  const dividerText = pillIndex === 0 ? "Todas las misiones" : pillIndex === 1 ? "Misiones completadas" : "Misiones archivadas";
+  const dividerText = pillIndex === 0 ? t('list.divider_all') : pillIndex === 1 ? t('list.divider_completed') : t('list.divider_archived');
 
   const handleSelectedPill = (index) => {
     setPillIndex(index);
@@ -61,7 +63,7 @@ function TodoList() {
               className={`headerPill ${pillIndex === index ? "active" : ""}`}
               onClick={() => { handleSelectedPill(index); }}
               aria-pressed={pillIndex === index}>
-              {index === 0 ? "Todas" : index === 1 ? "Completadas" : "Archivadas"}
+              {index === 0 ? t('list.filter_all') : index === 1 ? t('list.filter_completed') : t('list.filter_archived')}
               {pillIndex === index && (<HiCheck className="check-icon" />)}
             </button>
           ))
@@ -72,10 +74,10 @@ function TodoList() {
         {filterTodos.length === 0 ? (
           <p className="emptyState">
             {pillIndex === 0
-              ? "No hay misiones. ¡Crea tu primera misión, comandante!"
+              ? t('list.empty_all')
               : pillIndex === 1
-              ? "Aún no has completado ninguna misión. ¡Sigue así!"
-              : "No hay misiones archivadas."}
+              ? t('list.empty_completed')
+              : t('list.empty_archived')}
           </p>
         ) : (
           <div className="todoListPanelContent">

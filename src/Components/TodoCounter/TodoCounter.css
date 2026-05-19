@@ -18,7 +18,7 @@ p.adviceText {
 .progressBarContainer {
     width: 100%;
     height: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--progress-track);
     border-radius: 2px;
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
@@ -30,4 +30,12 @@ p.adviceText {
     background: linear-gradient(90deg, var(--color-star-glow), var(--color-pulsar));
     border-radius: 2px;
     transition: width 0.4s ease;
+}
+
+/* Light mode: title/advice flotan sobre el fondo oscuro del body */
+[data-theme="light"] h1.todoTitle {
+    color: #e8eaf6;
+}
+[data-theme="light"] p.adviceText {
+    color: rgba(232, 234, 246, 0.8);
 }

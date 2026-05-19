@@ -158,13 +158,13 @@
     align-items: flex-start;
     padding: 12px 16px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-objective-row);
+    border: 1px solid var(--border-overflow-opt);
     transition: background 0.2s ease;
 }
 
 .objective-item:hover {
-    background: rgba(255, 255, 255, 0.09);
+    background: var(--bg-overflow-btn-hover);
 }
 
 .objective-label {

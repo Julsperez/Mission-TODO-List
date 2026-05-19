@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import "./CreateTodoButton.css";
 function CreateTodoButton({setOpenTaskModal}) {
+  const { t } = useTranslation();
   return (
     <button
-      aria-label="Crear nueva misión"
+      aria-label={t('app.create_btn_label')}
       className="createTodoButton"
       onClick={() => setOpenTaskModal(true)}>
       +
