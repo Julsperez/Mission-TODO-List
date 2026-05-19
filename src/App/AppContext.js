@@ -36,8 +36,6 @@ function AppContext() {
     dismissToast
   } = React.useContext(TodoContext);
 
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-
   const handleCloseModal = () => {
     setOpenTaskModal(false);
     setIsEditTask(false);
@@ -46,14 +44,9 @@ function AppContext() {
     setTask({});
   };
 
-  const handleSubmitTodo = async (newTodo) => {
-    setIsSubmitting(true);
-    try {
-      await updateTodo(newTodo);
-    } finally {
-      setIsSubmitting(false);
-      handleCloseModal();
-    }
+  const handleSubmitTodo = (newTodo) => {
+    updateTodo(newTodo); // fire and forget — el optimistic update ya se aplicó
+    handleCloseModal();
   };
 
   return (
@@ -107,7 +100,6 @@ function AppContext() {
                       editView={isEditTask}
                       onSubmit={handleSubmitTodo}
                       onCancel={handleCloseModal}
-                      isSubmitting={isSubmitting}
                     />
                   }
                 </Modal>
