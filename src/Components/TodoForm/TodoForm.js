@@ -4,7 +4,7 @@ import { TodoContext } from "../../TodoContext";
 
 import "./TodoForm.css";
 
-function TodoForm({ onSubmit, editView, task, onCancel }) {
+function TodoForm({ onSubmit, editView, task, onCancel, isSubmitting = false }) {
   const { openTaskModal } = React.useContext(TodoContext);
   const [formData, setFormData] = useState(() => ({
     missionId: crypto.randomUUID(),
@@ -332,8 +332,9 @@ function TodoForm({ onSubmit, editView, task, onCancel }) {
         <button
           type="submit"
           className="todoForm-button confirm"
+          disabled={isSubmitting}
         >
-          {editView ? "Editar Misión" : "Crear Misión"}
+          {isSubmitting ? 'Guardando...' : (editView ? 'Editar Misión' : 'Crear Misión')}
         </button>
       </div>
     </form>
