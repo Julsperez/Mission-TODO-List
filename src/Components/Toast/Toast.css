@@ -49,3 +49,15 @@
 .toast__close:hover {
 	opacity: 1;
 }
+
+/* Light mode: fondo más opaco y texto legible sobre cualquier superficie */
+[data-theme="light"] .toast--error {
+	background: rgba(180, 30, 30, 0.92);
+	border-color: #cc3333;
+	color: #fff;
+}
+[data-theme="light"] .toast--success {
+	background: rgba(5, 100, 70, 0.92);
+	border-color: #059669;
+	color: #fff;
+}

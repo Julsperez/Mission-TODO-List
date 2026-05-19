@@ -31,3 +31,11 @@ p.adviceText {
     border-radius: 2px;
     transition: width 0.4s ease;
 }
+
+/* Light mode: title/advice flotan sobre el fondo oscuro del body */
+[data-theme="light"] h1.todoTitle {
+    color: #e8eaf6;
+}
+[data-theme="light"] p.adviceText {
+    color: rgba(232, 234, 246, 0.8);
+}

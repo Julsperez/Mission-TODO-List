@@ -76,3 +76,14 @@ button.headerPill {
         gap: 0.5rem;
     }
 }
+
+/* Light mode: list header y pills flotan sobre el fondo oscuro del body */
+[data-theme="light"] .todoListHeader {
+    color: #e8eaf6;
+}
+[data-theme="light"] .headerPill {
+    color: rgba(232, 234, 246, 0.75);
+}
+[data-theme="light"] .headerPill.active {
+    color: #e8eaf6;
+}

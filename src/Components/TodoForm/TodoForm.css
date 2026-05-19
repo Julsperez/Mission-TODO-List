@@ -439,12 +439,11 @@
   }
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+.todoFormContainer input:focus,
+.todoFormContainer textarea:focus,
+.todoFormContainer select:focus {
   outline: none;
-  border: 2px solid #3b82f6;
-  /* El azul que usas en tus tags */
+  border-color: var(--border-input-focus);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   transition: all 0.2s ease;
 }

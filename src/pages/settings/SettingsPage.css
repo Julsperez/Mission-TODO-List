@@ -149,7 +149,7 @@
 }
 
 .settings-select option {
-  background-color: #0d0d3a;
+  background-color: var(--bg-surface-menu);
   color: var(--color-text-primary);
 }
 

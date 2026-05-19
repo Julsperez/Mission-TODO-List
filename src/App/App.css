@@ -100,3 +100,20 @@ div.modalButton {
         margin: 0 auto;
     }
 }
+
+/* Light mode: elementos del header y mensajes flotan sobre el fondo oscuro del body */
+[data-theme="light"] .appContainerHeader {
+    color: #e8eaf6;
+}
+[data-theme="light"] .appLoadingMessage {
+    color: #e8eaf6;
+}
+[data-theme="light"] .settingsButton {
+    color: rgba(232, 234, 246, 0.8);
+    border-color: rgba(232, 234, 246, 0.2);
+}
+[data-theme="light"] .settingsButton:hover {
+    color: #e8eaf6;
+    border-color: rgba(0, 212, 255, 0.55);
+    background: rgba(255, 255, 255, 0.1);
+}

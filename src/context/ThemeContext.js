@@ -30,6 +30,12 @@ function ThemeProvider({ children }) {
     return VALID_THEMES.includes(stored) ? stored : 'dark';
   });
 
+  // Aplicar el tema almacenado en localStorage al DOM en el montaje inicial
+  // (evita flash de dark mode cuando el usuario tenía 'light' o 'system' guardado)
+  React.useLayoutEffect(() => {
+    applyThemeToDOM(theme);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Sincronizar desde servidor cuando el usuario carga/hace login
   React.useEffect(() => {
     const serverTheme = user?.settings?.theme;

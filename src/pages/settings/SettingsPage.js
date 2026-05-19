@@ -78,7 +78,13 @@ function SettingsPage() {
       setPwForm(PW_INITIAL);
       showToast(t('settings.security_success'));
     } catch (err) {
-      setPwError(err.response?.data?.message || t('settings.security_error_default'));
+      const status = err.response?.status;
+      // Solo mostrar el mensaje del servidor para errores de dominio (401 contraseña incorrecta,
+      // 400 validación). Cualquier otro error (404, 500, red) muestra el mensaje genérico.
+      const safeMsg = (status === 401 || status === 400)
+        ? err.response?.data?.message
+        : null;
+      setPwError(safeMsg || t('settings.security_error_default'));
     } finally {
       setPwLoading(false);
     }
