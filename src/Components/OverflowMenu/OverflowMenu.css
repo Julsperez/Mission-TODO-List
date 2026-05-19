@@ -26,7 +26,7 @@ div.overflowMenu-menu {
     flex-direction: column;
     gap: 5px;
     font-size: 1.2rem;
-    background: rgba(12, 12, 48, 0.96);
+    background: var(--bg-surface-menu);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     font-weight: 500;
@@ -36,7 +36,7 @@ div.overflowMenu-menu {
     top: auto;
     bottom: calc(100% + 8px);
     right: 0;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid var(--border-glass);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     z-index: 50;
 }

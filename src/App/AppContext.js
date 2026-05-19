@@ -11,7 +11,8 @@ import {
   TodoForm,
   TodoShowInfo,
   PomodoroTimer,
-  Toast
+  Toast,
+  ThemeToggle
 } from '../Components';
 import "./App.css"
 
@@ -65,9 +66,12 @@ function AppContext() {
 
               <div className='appContainerHeader'>
                 <TodoCounter />
-                <button onClick={logout} className="logoutButton">
-                 Cerrar sesión
-                </button>
+                <div className="appHeaderActions">
+                  <ThemeToggle />
+                  <button onClick={logout} className="logoutButton">
+                    Cerrar sesión
+                  </button>
+                </div>
               </div>
               {
                 !!searchedTodos.length ? (

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
+import { ThemeProvider } from '../context/ThemeContext';
 import { TodoProvider } from '../TodoContext';
 import { AppContext } from './AppContext';
 import { MigrationModal } from '../Components';
@@ -15,32 +16,34 @@ function App() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <AuthProvider>
-        <Routes>
+        <ThemeProvider>
+          <Routes>
 
-          {/* Rutas públicas — redirigen a / si ya autenticado */}
-          <Route element={<PublicRoute />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          </Route>
+            {/* Rutas públicas — redirigen a / si ya autenticado */}
+            <Route element={<PublicRoute />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            </Route>
 
-          {/* Rutas neutras — accesibles con o sin sesión (token en URL) */}
-          <Route path="/verify-email" element={<VerifyEmailPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
+            {/* Rutas neutras — accesibles con o sin sesión (token en URL) */}
+            <Route path="/verify-email" element={<VerifyEmailPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-          {/* Rutas privadas — redirigen a /login si no autenticado */}
-          <Route element={<PrivateRoute />}>
-            <Route path="/" element={
-              <TodoProvider>
-                <MigrationModal />
-                <AppContext />
-              </TodoProvider>
-            } />
-          </Route>
+            {/* Rutas privadas — redirigen a /login si no autenticado */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/" element={
+                <TodoProvider>
+                  <MigrationModal />
+                  <AppContext />
+                </TodoProvider>
+              } />
+            </Route>
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
 
-        </Routes>
+          </Routes>
+        </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
   );

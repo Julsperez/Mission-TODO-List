@@ -11,3 +11,4 @@ export { TodoShowInfo } from './TodoShowInfo/TodoShowInfo';
 export { PomodoroTimer } from './PomodoroTimer/PomodoroTimer';
 export { MigrationModal } from './MigrationModal/MigrationModal';
 export { Toast } from './Toast/Toast';
+export { ThemeToggle } from './ThemeToggle/ThemeToggle';

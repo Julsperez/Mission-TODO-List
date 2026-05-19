@@ -39,8 +39,14 @@ div.modalButton {
     cursor: pointer;
 }
 
-.logoutButton {
+.appHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   align-self: flex-end;
+}
+
+.logoutButton {
   background: none;
   border: 1px solid var(--color-danger);
   color: var(--color-danger);
